@@ -1,0 +1,54 @@
+@import "../../../styles/colors.scss";
+
+.form {
+  width: 100%;
+  max-width: 400px;
+  padding: 0 10px;
+  margin: 0 auto;
+}
+
+.inputWrap {
+  margin: 10px 0;
+}
+
+.create {
+  position: relative;
+  font: 16px/1 "Neutral";
+  display: block;
+  height: 40px;
+  text-align: left;
+  margin: 0 auto;
+  padding: 10px 47px 10px 10px;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    width: 29px;
+    height: 37px;
+    top: 1px;
+    right: 7px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    transition: opacity 300ms;
+  }
+
+  &::before {
+    background-image: url(/images/create-document.svg);
+  }
+
+  &::after {
+    background-image: url(/images/create-document-inverted.svg);
+    opacity: 0;
+  }
+
+  &:hover {
+    &::before {
+      opacity: 0;
+    }
+
+    &::after {
+      opacity: 1;
+    }
+  }
+}

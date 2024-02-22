@@ -1,0 +1,28 @@
+@import "../../styles/colors.scss";
+
+.documents {
+  padding: 90px 20px;
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.heading {
+  font: 52px/1 "Neutral";
+  margin-bottom: 30px;
+}
+
+.documentsTable {
+  margin-bottom: 70px;
+}
+
+.newDocBtn {
+  display: flex;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 300ms 300ms;
+
+  &.loaded {
+    opacity: 1;
+  }
+}

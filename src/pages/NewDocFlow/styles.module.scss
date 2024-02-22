@@ -1,0 +1,47 @@
+.newDocFlow {
+  height: 0;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  &.visible {
+    height: 100vh;
+  }
+}
+
+.documentExtender {
+  &.long {
+    width: 1px;
+    height: 300vh;
+    position: relative;
+    z-index: 10000;
+    overflow-y: scroll;
+  }
+}
+
+.curtainWrap {
+  transform: translateY(-105%);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: calc(100% - 21px);
+  left: 0;
+  transition: transform 600ms ease-in;
+
+  &.num1 {
+    z-index: 3;
+  }
+
+  &.num2 {
+    z-index: 2;
+  }
+
+  &.num3 {
+    z-index: 1;
+  }
+
+  &.down {
+    transform: translateY(0);
+  }
+}

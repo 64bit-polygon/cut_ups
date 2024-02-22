@@ -1,0 +1,85 @@
+@import "../../styles/colors.scss";
+
+.dungeonCurtain {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $BACKGROUND;
+  padding: 0 60px;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -21px;
+    height: 21px;
+    width: 100%;
+    background-image: url(/images/teeth.png);
+  }
+
+  &.num1 {
+    &::after {
+      background-position-x: 0;
+    }
+  }
+
+  &.num2 {
+    &::after {
+      background-position-x: 10px;
+    }
+  }
+
+  &.num3 {
+    &::after {
+      background-position-x: 20px;
+    }
+  }
+}
+
+.content {
+  width: 100%;
+}
+
+.scrollLabel {
+  font: 11px/13px "SkyhookMono";
+  bottom: 50%;
+  position: absolute;
+  right: -30px;
+  text-align: center;
+  text-transform: uppercase;
+  transform: rotate(90deg);
+  width: 116px;
+  height: 13px;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0px;
+    height: 13px;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  &::before {
+    background-image: url(/images/scroll-arrow-tail.svg);
+    width: 15px;
+    left: -17px;
+  }
+
+  &::after {
+    background-image: url(/images/scroll-arrow-head.svg);
+    width: 21px;
+    right: -22px;
+  }
+}
+
+.indexLabel {
+  font: 11px/1 "SkyhookMono";
+  position: absolute;
+  bottom: 25px;
+  left: 30px;
+}

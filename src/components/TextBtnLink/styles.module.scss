@@ -1,0 +1,15 @@
+@import "../../styles/colors.scss";
+
+.textBtn {
+  font: 18px/1 "SimplonMono";
+  padding: 6px;
+
+  &.bordered {
+    border: 1px solid $BTN_DARK;
+  }
+
+  &.small {
+    font-size: 12px;
+    padding: 4px;
+  }
+}

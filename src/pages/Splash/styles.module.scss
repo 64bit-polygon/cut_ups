@@ -1,0 +1,28 @@
+.splash {
+  width: 100%;
+  max-height: 100vh;
+}
+
+.animatedDocsWrap {
+  position: absolute;
+  top: calc(50% + 40px);
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.next {
+  width: 60px;
+  height: 30px;
+
+  &::before {
+    background-image: url(/images/arrow-right.svg);
+  }
+
+  &::after {
+    background-image: url(/images/arrow-right-inverted.svg);
+  }
+}

@@ -1,0 +1,12 @@
+.logoBtn {
+  width: 80px;
+  height: 80px;
+  
+  &::before {
+    background-image: url(/images/logo.svg);
+  }
+
+  &::after {
+    background-image: url(/images/logo-inverted.svg);
+  }
+}

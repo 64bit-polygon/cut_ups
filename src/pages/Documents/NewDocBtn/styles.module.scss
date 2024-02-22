@@ -1,0 +1,69 @@
+@import "../../../styles/colors.scss";
+
+.newDocBtn {
+  position: relative;
+  $size: 90px;
+  width: $size;
+  height: $size;
+
+  &:hover {
+    &::after {
+      opacity: 1;
+    }
+
+    &::before {
+      opacity: 0;
+    }
+  }
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    $size: 70px;
+    width: $size;
+    height: $size;
+    border-radius: 50%;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-position: 53% 45%;
+    background-size: 45%;
+    transition: opacity 200ms;
+  }
+
+  &::after {
+    opacity: 0;
+    background-color: $BTN_DARK;
+    background-image: url(/images/doc-icon-inverted.svg);
+  }
+
+  &::before {
+    background-color: $BTN_LIGHT;
+    background-image: url(/images/doc-icon.svg);
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(60deg);
+  }
+}
+
+.text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url(/images/new-doc-rotating-text.svg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  animation: 1s linear infinite rotate;
+}

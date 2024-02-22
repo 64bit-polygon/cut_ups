@@ -1,0 +1,192 @@
+@import "../../../styles/variables.scss";
+@import "../../../styles/colors.scss";
+
+.documentRow {
+  position: relative;
+  font-size: 13px;
+  line-height: 1;
+  height: 55px;
+  overflow: hidden;
+  transition: height 300ms;
+
+  &.deleted {
+    height: 0;
+  }
+}
+
+.docInfo {
+  display: flex;
+  height: 100%;
+  padding: 0 5px;
+  transition: opacity 300ms, transform 300ms;
+  transform-origin: center center;
+
+  .documentRow.deleted & {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+}
+
+.col {
+  height: 100%;
+  display: flex;
+  align-items: center;
+
+  .confirmDeleteInfo > & {
+    background-color: $BTN_DARK;
+    pointer-events: auto;
+  }
+}
+
+.col1 {
+  $NON_TITLE_WIDTH: $DOC_ROW_DATE_WIDTH + $DOC_ROW_REMOVE_WIDTH;
+  width: calc(100% - $NON_TITLE_WIDTH);
+  display: flex;
+  align-items: center;
+}
+
+.titleLink {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 55px;
+}
+
+.interactiveText {
+  position: relative;
+
+  .confirmDeleteInfo & {
+    &::after {
+      background-color: $BTN_LIGHT;
+    }
+  }
+
+  *:hover > &::after {
+    opacity: 1;
+  }
+  
+  &::after {
+    content: "";
+    position: absolute;
+    height: 1.5px;
+    width: 100%;
+    bottom: -2px;
+    left: 0;
+    background-color: $BTN_DARK;
+    opacity: 0;
+    transition: opacity 200ms;
+  }
+}
+
+.col2 {
+  width: $DOC_ROW_DATE_WIDTH;
+  justify-content: center;
+}
+
+.shortDate {
+  width: 60px;
+  display: none;
+}
+
+.col3 {
+  width: $DOC_ROW_REMOVE_WIDTH;
+  justify-content: center;
+}
+
+.removeBtn {
+  background-color: $BTN_LIGHT;
+  $size: 20px;
+  width: $size;
+  height: $size;
+  transition: background-color 300ms;
+  border-radius: 50%;
+
+  &:hover {
+    background-color: $BTN_DARK;
+  }
+
+  &:disabled {
+    &:hover {
+      background-color: $BTN_LIGHT;
+      cursor: default;
+    }
+  }
+
+  &::before,
+  &::after {
+    $size: 10px;
+    width: $size;
+    height: $size;
+  }
+
+  &::before {
+    background-image: url(/images/remove-row.svg);
+  }
+
+  &::after {
+    background-image: url(/images/remove-row-inverted.svg);
+  }
+}
+
+.contentMask {
+  position: absolute;
+  top: 16px;
+  left: 0;
+  width: 100%;
+  height: 26px;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.confirmDeleteInfo {
+  backdrop-filter: invert(100%);
+  pointer-events: none;
+  justify-content: flex-end;
+  transform: translateY(100%);
+  transition: transform 200ms;
+
+  &.visible {
+    transform: translateY(0);
+  }
+}
+
+.deleteFlowBtn {
+  position: relative;
+  color: $BTN_LIGHT;
+  font: bold 12px/1 "SimplonMono";
+}
+
+.processing,
+.errorMessage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: $BTN_DARK;
+  opacity: 0;
+  transition: opacity 300ms;
+
+  &.visible {
+    opacity: 1;
+    pointer-events: all;
+  }
+}
+
+.processing {
+  background-image: url(/images/loading-dots-light.svg);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 35px;
+}
+
+.errorMessage {
+  color: $BTN_LIGHT;
+  font: bold 12px/1 "SimplonMono";
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

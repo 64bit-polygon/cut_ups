@@ -1,0 +1,195 @@
+@import "../../../styles/colors.scss";
+@import "../../../styles/variables.scss";
+
+.sounceInterface {
+  position: relative;
+  width: 100%;
+  max-width: 920px;
+  height: 400px;
+  margin: 0 auto;
+  overflow: hidden;
+  border: 1px solid $BTN_DARK;
+
+  &.touched {
+    &::after {
+      transform: translateX(100%);
+    }
+  }
+}
+
+.label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  align-items: flex-start;
+  gap: 20px;
+  transition: opacity 200ms;
+
+  &.hidden {
+    opacity: 0;
+  }
+}
+
+.labelLine {
+  font: 45px/1 "SkyhookMono";
+  color: $BTN_DARK;
+  text-transform: uppercase;
+  background-color: $BTN_LIGHT;
+  border: 1px solid $BTN_DARK;
+  padding: 5px;
+  box-shadow: 1px 1px 0 $BTN_DARK;
+  transition: color 200ms, background-color 200ms;
+  white-space: nowrap;
+  
+  .sounceInterface:hover & {
+    color: $BTN_LIGHT;
+    background-color: $BTN_DARK;
+  }
+}
+
+.sourceBtn {
+  position: absolute;
+  height: 100%;
+  width: 60px;
+  z-index: 100;
+  background-color: $BTN_LIGHT;
+  top: 0;
+  font: 19px/1 "SkyhookMono";
+  color: $BTN_DARK;
+  @include stroke();
+  transition: transform 700ms ease-out, color 200ms, background-color 200ms;
+
+  &:hover {
+    color: $BTN_LIGHT;
+    background-color: $BTN_DARK;
+
+    &.notVisible {
+      color: $BTN_DARK;
+      background-color: $BTN_LIGHT;
+    }
+  }
+
+  &.textInputBtn {
+    left: 0;
+    transform: translateX(-62px);
+
+    &.visible {
+      transform: translateX(0);
+    }
+  }
+
+  &.publishedSrcsBtn {
+    right: 0;
+    transform: translateX(62px);
+
+    &.visible {
+      transform: translateX(0);
+    }
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 1px;
+    background-color: $BTN_LIGHT;
+    border-right: 1px dashed $BTN_DARK;
+    top: 0;
+  }
+
+  &.publishedSrcsBtn {
+    &::after {
+      left: -1px;
+    }
+  }
+
+  &.textInputBtn {
+    &::after {
+      right: -1px;
+    }
+  }
+}
+
+.sourceBtnText {
+  position: absolute;
+  text-transform: uppercase;
+  transform: rotate(-90deg);
+  width: 400px;
+  height: 60px;
+  top: 42.5%;
+  left: -170px;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  
+  .publishedSrcsBtn & {
+    transform: rotate(90deg);
+  }
+}
+
+.sourceWrap {
+  position: absolute;
+  height: 100%;
+  top: 0;
+  left: 0;
+  width: calc(100% - 60px);
+  transition: width 700ms ease-out, transform 700ms ease-out;
+  background-color: $BACKGROUND;
+
+  &.untouched {
+    width: 50%;
+  }
+
+  &.textInputSrcWrap {
+    padding: 10px 0 0 20px;
+  }
+
+  &.publishedSrcsWrap {
+    transform: translateX(100%);
+
+    &.focused {
+      transform: translateX(60px);
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 1px;
+      z-index: 1;
+      background-color: $BTN_LIGHT;
+      border-right: 1px dashed $BTN_DARK;
+    }
+  }
+}
+
+.scrollWrap {
+  height: 100%;
+  overflow-y: scroll;
+}
+
+.textarea {
+  border: none;
+  overflow: auto;
+  outline: none;
+  resize: none;
+  font: 12px/22px "Neutral";
+  padding-left: 8px;
+  display: block;
+  width: 100%;
+  min-height: 100%;
+
+  &,
+  &::placeholder {
+    color: $BTN_DARK;
+  }
+}

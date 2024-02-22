@@ -1,0 +1,35 @@
+@import "../../../styles/colors.scss";
+
+.sources {
+  padding: 10px 20px;
+}
+
+.source {
+  position: relative;
+  display: block;
+}
+
+.input {
+  position: absolute;
+  opacity: 0;
+}
+
+.label {
+  display: block;
+  font: 12px/22px "Neutral";
+  color: $BTN_DARK;
+  background-color: $BTN_LIGHT;
+  transition: color 200ms, background-color 200ms;
+  cursor: pointer;
+  padding: 0 8px;
+
+  &:hover,
+  .input:checked + & {
+    color: $BTN_LIGHT;
+    background-color: $BTN_DARK;
+  }
+
+  .input:checked + & {
+    cursor: default;
+  }
+}

@@ -1,0 +1,20 @@
+@import "../../styles/colors.scss";
+
+.authType {
+  border-bottom: 1px solid $BTN_DARK;
+  margin-bottom: 10px;
+}
+
+.toggleBtn {
+  font: 11px/1 "Neutral";
+  border: 1px solid $BTN_DARK;
+  border-bottom: 0;
+  padding: 5px 7px;
+  margin-left: 6px;
+  font-weight: 800;
+
+  &.selected {
+    color: $BTN_LIGHT;
+    background-color: $BTN_DARK;
+  }
+}

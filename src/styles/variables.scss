@@ -1,0 +1,26 @@
+@import "./colors.scss";
+
+$PHONE_WIDTH: 224px;
+
+$DOC_ROW_DATE_WIDTH: 150px;
+$DOC_ROW_REMOVE_WIDTH: 50px;
+$DOC_ROW_CONTENT_HEIGHT: 20px;
+$DOC_ROW_NON_TITLE_WIDTH: $DOC_ROW_DATE_WIDTH + $DOC_ROW_REMOVE_WIDTH;
+
+$DOC_BTN_SIZE: 28px;
+$DOC_BTN_GAP: 5px;
+$DOC_MENU_GAP: 20px;
+
+$DOC_COL_WIDTH: 800px;
+
+@mixin stroke($color: $TEXT_OUTLINE, $size: 1px) {
+  text-shadow:
+    -#{$size} -#{$size} 0 $color,
+     0        -#{$size} 0 $color,
+     #{$size} -#{$size} 0 $color,
+     #{$size}  0        0 $color,
+     #{$size}  #{$size} 0 $color,
+     0         #{$size} 0 $color,
+    -#{$size}  #{$size} 0 $color,
+    -#{$size}  0        0 $color;
+}

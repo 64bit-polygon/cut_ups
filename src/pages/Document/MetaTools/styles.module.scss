@@ -1,0 +1,13 @@
+@import "../../../styles/variables.scss";
+
+.tools {
+  $PADDING: 160px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 5px $PADDING 0;
+  width: 100%;
+  max-width: $DOC_COL_WIDTH + $PADDING * 2;
+  margin: 0 auto;
+}

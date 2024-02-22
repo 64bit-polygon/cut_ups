@@ -1,0 +1,19 @@
+@import "../../styles/variables.scss";
+
+.page {
+  padding-bottom: 100px;
+}
+
+.mainColumnWrap {
+  padding: 0 10px;
+}
+
+.mainColumn {
+  width: 100%;
+  max-width: $DOC_COL_WIDTH;
+  margin: 0 auto;
+}
+
+.header {
+  margin-bottom: 20px;
+}

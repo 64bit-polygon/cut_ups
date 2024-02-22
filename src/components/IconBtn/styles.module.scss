@@ -1,0 +1,24 @@
+@import "../../styles/colors.scss";
+@import "../../styles/variables.scss";
+
+.button {
+  width: $DOC_BTN_SIZE;
+  height: $DOC_BTN_SIZE;
+  background-color: $BTN_LIGHT;
+  border: 1px solid $BTN_DARK;
+  transition: background-color 200ms;
+
+  &:hover {
+    background-color: $BTN_DARK;
+  }
+}
+
+.icon {
+  width: 100%;
+  height: 100%;
+  transition: fill 200ms;
+
+  .button:hover & {
+    fill: $BTN_LIGHT;
+  }
+}

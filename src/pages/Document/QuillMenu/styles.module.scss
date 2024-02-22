@@ -1,0 +1,42 @@
+@import "../../../styles/colors.scss";
+@import "../../../styles/variables.scss";
+
+.menu {
+  position: relative;
+  overflow: hidden;
+  height: $DOC_BTN_SIZE;
+  width: $DOC_BTN_SIZE;
+  z-index: 1;
+
+  &.visible {
+    &.buttonCnt3 {
+      width: $DOC_MENU_GAP + ($DOC_BTN_SIZE * 4);
+    }
+    &.buttonCnt4 {
+      width: $DOC_MENU_GAP + ($DOC_BTN_SIZE * 5);
+    }
+    &.buttonCnt6 {
+      width: $DOC_MENU_GAP + ($DOC_BTN_SIZE * 7);
+    }
+  }
+}
+
+.menuHeader {
+  width: $DOC_BTN_SIZE;
+  height: $DOC_BTN_SIZE;
+  border: 1px solid $BTN_DARK;
+  background-color: $BTN_LIGHT;
+}
+
+.menuContent {
+  position: absolute;
+  top: 0;
+  left: $DOC_BTN_SIZE + $DOC_BTN_GAP;
+  height: $DOC_BTN_SIZE;
+  display: flex;
+}
+
+.menuIcon {
+  width: 100%;
+  height: 100%;
+}

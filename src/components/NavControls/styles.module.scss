@@ -1,0 +1,22 @@
+@import "../../styles/colors.scss";
+
+.controls {
+  margin: 1px 10px 0 0;
+  display: flex;
+}
+
+.slashDivider {
+  position: relative;
+  margin-right: 20px;
+
+  &::after {
+    content: "";
+    position: absolute;
+    height: 14px;
+    width: 1px;
+    right: -11px;
+    top: 6px;
+    background-color: $BTN_DARK;
+    transform: rotate(30deg);
+  }
+}

@@ -1,0 +1,13 @@
+.curtainWrap {
+  transform: translateY(-105%);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: calc(100% - 21px);
+  left: 0;
+  transition: transform 600ms ease-in;
+
+  &.down {
+    transform: translateY(0);
+  }
+}

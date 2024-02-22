@@ -1,0 +1,53 @@
+@font-face {
+	font-family: "Neutral";
+	src: url("/fonts/neutral.woff2") format("woff2"),
+			 url("/fonts/neutral.woff") format("woff"),
+			 url("/fonts/neutral.tff") format("tff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+	font-family: "Romain";
+	src: url("/fonts/romain.woff2") format("woff2"),
+			 url("/fonts/romain.woff") format("woff"),
+			 url("/fonts/romain.tff") format("tff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+	font-family: "Romain";
+	src: url("/fonts/romainItalic.woff2") format("woff2"),
+			 url("/fonts/romainItalic.woff") format("woff"),
+			 url("/fonts/romainItalic.tff") format("tff");
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "SimplonMono";
+  src: url("/fonts/simplonMono.woff2") format("woff2"),
+			 url("/fonts/simplonMono.woff") format("woff"),
+			 url("/fonts/simplonMono.tff") format("tff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SimplonMono";
+  src: url("/fonts/simplonMonoMedium.woff2") format("woff2"),
+			 url("/fonts/simplonMonoMedium.woff") format("woff"),
+			 url("/fonts/simplonMonoMedium.tff") format("tff");
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SkyhookMono";
+  src: url("/fonts/skyhookMono.woff2") format("woff2"),
+			 url("/fonts/skyhookMono.woff") format("woff"),
+			 url("/fonts/skyhookMono.tff") format("tff");
+  font-weight: normal;
+  font-style: normal;
+}

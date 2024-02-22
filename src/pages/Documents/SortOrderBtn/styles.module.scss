@@ -1,0 +1,40 @@
+@import "../../../styles/colors.scss";
+
+.sortBtn {
+  width: 100%;
+  text-align: inherit;
+  padding: 4px 0;
+
+  &.ascend:hover .text::after {
+    opacity: 1;
+  }
+
+  &.descend:hover .text::before {
+    opacity: 1;
+  }
+}
+
+.text {
+  position: relative;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    right: -10px;
+    opacity: 0;
+    transition: opacity 100ms;
+  }
+
+  &::before {
+    background-image: url("/images/arrow-desc.svg");
+    top: 4px;
+  }
+
+  &::after {
+    background-image: url("/images/arrow-asc.svg");
+    top: 1px;
+  }
+}

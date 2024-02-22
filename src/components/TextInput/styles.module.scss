@@ -1,0 +1,132 @@
+@import "../../styles/colors.scss";
+
+.inputWrap {
+  position: relative;
+  border-bottom: 1px solid $BTN_DARK;
+  padding-left: 3px;
+  transition: opacity 300ms, border-bottom-color 200ms;
+
+  &.disabled {
+    opacity: 0.25;
+  }
+
+  &.errored {
+    border-bottom-color: $ERR;
+  }
+}
+
+.input {
+  font: 16px/1.6 "Neutral";
+  border: 0;
+  outline: none;
+  background-color: transparent;
+  width: 100%;
+  transition: color 200ms;
+
+  &.errored {
+    color: $ERR;
+    -webkit-text-fill-color: $ERR;
+  }
+  
+  &::selection {
+    background-color: yellow;
+  }
+
+  &:placeholder-shown + .label .labelText {
+    display: inline;
+  }
+
+  &.errored + .label .labelText {
+    color: $ERR;
+  }
+
+  &:focus,
+  &:-webkit-autofill,
+  &:-webkit-autofill:focus{
+    -webkit-box-shadow: 0 0 0px 40rem #ffff inset;
+  }
+
+  &:focus:placeholder-shown {
+    caret-color: transparent;
+  }
+
+  &:focus:placeholder-shown + .label {
+    &::after {
+      display: block;
+    }
+
+    .labelText {
+      display: none;
+    }
+  }
+}
+
+.errorMessage {
+  position: absolute;
+  left: 6px;
+  bottom: -11px;
+}
+
+@keyframes caretBlink {
+  0%     { opacity: 1; }
+  50%    { opacity: 1; }
+  50.01% { opacity: 0; }
+  100%   { opacity: 0; }
+}
+
+.label {
+  position: absolute;
+  left: 2px;
+  top: 1px;
+  font: 16px/1.6 "Neutral";
+
+  &::after {
+    content: "";
+    display: none;
+    position: absolute;
+    width: 8px;
+    height: 26px;
+    top: 1px;
+    left: -2px;
+    background-color: $BTN_DARK;
+    animation: caretBlink 1000ms linear infinite;
+  }
+}
+
+.labelText {
+  display: none;
+  padding-left: 3px;
+}
+
+.passwordToggle {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  right: 0;
+  top: -6px;
+
+  &::before,
+  &::after {
+    border: 2px solid transparent;
+    border-radius: 4px;
+  }
+
+  &::before {
+    background-image: url(/images/eye.svg);
+  }
+
+  &::after {
+    background-image: url(/images/eye-inverted.svg);
+    border-color: $BTN_DARK;
+  }
+
+  &.hidePassword {
+    &::before {
+      background-image: url(/images/eye-x.svg);
+    }
+
+    &::after {
+      background-image: url(/images/eye-x-inverted.svg);
+    }
+  }
+}

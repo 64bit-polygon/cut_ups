@@ -1,0 +1,45 @@
+@import "../../../styles/colors.scss";
+
+.iconListItem {
+  padding-left: 50px;
+  margin-bottom: 15px;
+}
+
+.iconListLine {
+  position: relative;
+
+  &.header {
+    margin-bottom: 15px;
+  }
+}
+
+.iconWrap {
+  position: absolute;
+  left: -50px;
+  top: 50%;
+  transform: translateY(-50%);
+  $size: 30px;
+  width: $size;
+  height: $size;
+
+  &.backgroundColor {
+    background-color: $DARK;
+  }
+
+  &.folder {
+    margin-top: -2px;
+  }
+
+  &.style {
+    width: 11px;
+    height: 46px;
+    left: -40px;
+    background-image: url(/images/style-menu.svg);
+  }
+}
+
+.icon {
+  &.backgroundColor {
+    fill: $LIGHT;
+  }
+}

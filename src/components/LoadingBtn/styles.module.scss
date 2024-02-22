@@ -1,0 +1,117 @@
+@import "../../styles/colors.scss";
+
+.btnWrap {
+  position: relative;
+
+  &.loading {
+    &::after {
+      opacity: 1;
+    }
+  }
+
+  &::after {
+    content: "";
+    pointer-events: none;
+    position: absolute;
+    width: 62px;
+    height: 18px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-image: url(/images/loading-dots.svg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    opacity: 0;
+    transition: opacity 200ms;
+  }
+}
+
+.loadingBtn {
+  position: relative;
+
+  &.disabled {
+    cursor: default;
+    opacity: 0.25;
+  }
+
+  &.loading {
+    cursor: default;
+
+    &:hover {
+      background-color: $BTN_LIGHT;
+    }
+  }
+
+  &.document {
+    display: block;
+    height: 40px;
+    text-align: left;
+    padding: 10px 47px 10px 10px;
+
+    &.loading,
+    &.loading:hover,
+    &.loading.disabled {
+      &::before,
+      &::after {
+        opacity: 0;
+      }
+    }
+  
+    &::before,
+    &::after {
+      content: "";
+      position: absolute;
+      width: 29px;
+      height: 37px;
+      top: 1px;
+      right: 7px;
+      background-position: center center;
+      background-repeat: no-repeat;
+      transition: opacity 300ms;
+    }
+  
+    &::before {
+      background-image: url(/images/create-document.svg);
+    }
+  
+    &::after {
+      background-image: url(/images/create-document-inverted.svg);
+      opacity: 0;
+    }
+
+    &:hover {
+      &::before {
+        opacity: 0;
+      }
+  
+      &::after {
+        opacity: 1;
+      }
+    }
+
+    &.disabled {
+      &::before {
+        opacity: 1;
+      }
+  
+      &::after {
+        opacity: 0;
+      }
+    }
+  }
+}
+
+.btnContent {
+  transition: opacity 200ms;
+
+  &.hidden {
+    opacity: 0;
+  }
+}
+
+.errorWrap {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -15px;
+}

@@ -1,0 +1,24 @@
+@import "../../../styles/colors.scss";
+@import "../../../styles/variables.scss";
+
+.headers {
+  font: bold 12px/1 "SimplonMono";
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.titleHeader {
+  width: calc(100% - $DOC_ROW_NON_TITLE_WIDTH);
+}
+
+.dateHeader {
+  width: $DOC_ROW_DATE_WIDTH;
+  text-align: center;
+}
+
+.removeHeader {
+  width: $DOC_ROW_REMOVE_WIDTH;
+  text-align: center;
+}

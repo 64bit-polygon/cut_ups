@@ -1,0 +1,196 @@
+.ql-editor {
+  box-sizing: border-box;
+  font-size: 18px;
+  line-height: 1.5;
+  height: 100%;
+  outline: none;
+  overflow-y: auto;
+  padding: 0;
+  tab-size: 4;
+  -moz-tab-size: 4;
+  text-align: left;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+
+  & > * {
+    cursor: text;
+  }
+
+  .ql-align-center {
+    text-align: center;
+  }
+  .ql-align-justify {
+    text-align: justify;
+  }
+  .ql-align-right {
+    text-align: right;
+  }
+
+  .ql-font-simplonMono {
+    font-family: "SimplonMono";
+  }
+  
+  .ql-font-neutral {
+    font-family: "Neutral";
+  }
+  
+  .ql-font-romain {
+    font-family: "Romain";
+  }
+
+  .ql-size-tiny {
+    font-size: 9px;
+  }
+
+  .ql-size-small {
+    font-size: 12px;
+  }
+
+  .ql-size-normal {
+    font-size: 18px;
+  }
+
+  .ql-size-big {
+    font-size: 24px;
+  }
+
+  .ql-size-large {
+    font-size: 36px;
+  }
+
+  .ql-size-huge {
+    font-size: 45px;
+  }
+
+  em {
+    font-style: italic;
+  }
+
+  strong {
+    font-weight: bold;
+  }
+
+  p {
+    margin: 0;
+    padding: 0;
+  }
+
+  .ql-direction-rtl {
+    direction: rtl;
+    text-align: inherit;
+  }
+
+  .ql-align-center {
+    text-align: center;
+  }
+
+  .ql-align-justify {
+    text-align: justify;
+  }
+
+  .ql-align-right {
+    text-align: right;
+  }
+}
+
+.ql-container {
+  box-sizing: border-box;
+  font-family: Helvetica, Arial, sans-serif;
+  
+  height: 100%;
+  margin: 0;
+  position: relative;
+}
+
+.ql-clipboard {
+  left: -100000px;
+  height: 1px;
+  overflow-y: hidden;
+  position: absolute;
+  top: 50%;
+
+  p {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+
+.ql-snow .ql-hidden {
+  display: none;
+}
+
+/*
+.ql-editor.ql-blank::before {
+  color: rgba(0,0,0,0.6);
+  content: attr(data-placeholder);
+  font-style: italic;
+  left: 15px;
+  pointer-events: none;
+  position: absolute;
+  right: 15px;
+}
+
+.ql-snow {
+  box-sizing: border-box;
+
+  * {
+    box-sizing: border-box;
+  }
+}
+
+.ql-snow .ql-out-bottom,
+.ql-snow .ql-out-top {
+  visibility: hidden;
+}
+
+.ql-snow .ql-formats {
+  display: inline-block;
+  vertical-align: middle;
+}
+.ql-snow .ql-formats:after {
+  clear: both;
+  content: '';
+  display: table;
+}
+
+.ql-snow .ql-stroke {
+  fill: none;
+  stroke: #444;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+}
+.ql-snow .ql-stroke-miter {
+  fill: none;
+  stroke: #444;
+  stroke-miterlimit: 10;
+  stroke-width: 2;
+}
+.ql-snow .ql-fill,
+.ql-snow .ql-stroke.ql-fill {
+  fill: #444;
+}
+.ql-snow .ql-empty {
+  fill: none;
+}
+.ql-snow .ql-even {
+  fill-rule: evenodd;
+}
+.ql-snow .ql-thin,
+.ql-snow .ql-stroke.ql-thin {
+  stroke-width: 1;
+}
+.ql-snow .ql-transparent {
+  opacity: 0.4;
+}
+.ql-snow .ql-direction svg:last-child {
+  display: none;
+}
+.ql-snow .ql-direction.ql-active svg:last-child {
+  display: inline;
+}
+.ql-snow .ql-direction.ql-active svg:first-child {
+  display: none;
+}
+*/
