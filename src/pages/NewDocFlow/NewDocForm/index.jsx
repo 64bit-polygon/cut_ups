@@ -122,7 +122,7 @@ export const NewDocForm = ({isVisible}) => {
         source2
       });
       setDocuments(doc.data.documents);
-      navigate(`/documents/${doc.data.docId}`);
+      navigate(`/documents/${doc.data.docId}`, {state: { fadeIn: true }});
     } catch(error) {
       showApiError("Could not create doc");
     }

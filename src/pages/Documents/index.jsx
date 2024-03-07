@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import styles from "./styles.module.scss";
 import cn from "classnames";
-import { useRecoilValue, useRecoilState } from "recoil";
+import { useRecoilValue, useSetRecoilState, useRecoilState } from "recoil";
 import { useNavigate } from "react-router-dom";
 import { getDocuments } from "../../utils/api.js"
 import { userSelector, showAuthSelector, documentsSelector } from "../../state/selectors";
 import { DocumentsTable } from "./DocumentsTable";
-import { NewDocBtn } from "./NewDocBtn";
+import { NewDocBtn } from "../../components/NewDocBtn";
 
 const Documents = () => {
   const [documents, setDocuments] = useRecoilState(documentsSelector);
-  const [isAuthVisible, setAuthVisibility] = useRecoilState(showAuthSelector);
+  const setAuthVisibility = useSetRecoilState(showAuthSelector);
   const user = useRecoilValue(userSelector);
   const navigate = useNavigate();
 

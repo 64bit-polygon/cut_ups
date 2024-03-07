@@ -10,7 +10,7 @@ import { Router } from "./components/Router";
 import { initializeApp } from "firebase/app";
 import firebaseConfig from "./firebaseConfig";
 import { getAuth } from "firebase/auth";
-import { getSources as getDbSources } from "./utils/api.js"
+import { getSources as getDbSources } from "./utils/api.js";
 
 const firebaseApp = initializeApp(firebaseConfig);
 const auth = getAuth(firebaseApp);

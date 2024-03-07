@@ -1,8 +1,9 @@
 @import "../../styles/colors.scss";
 @import "../../styles/variables.scss";
 
-.button {
+.link {
   position: relative;
+  display: inline-block;
   width: $DOC_BTN_SIZE;
   height: $DOC_BTN_SIZE;
   background-color: $BTN_LIGHT;
@@ -23,7 +24,7 @@
   transform: translate(-50%, -50%);
   transition: fill 200ms;
 
-  .button:hover & {
+  .link:hover & {
     fill: $BTN_LIGHT;
   }
 }

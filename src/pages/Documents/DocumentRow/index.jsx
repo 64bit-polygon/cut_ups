@@ -70,7 +70,7 @@ export const DocumentRow = ({
     setIsProcessing(true);
 
     try {
-      const response = await deleteDocument({docId, userId: user.userId});
+      const response = await deleteDocument(docId, user.userId);
       setIsDeleted(true);
       setTimeout(() => {
         setIsDeleteDisabled();

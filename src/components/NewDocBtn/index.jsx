@@ -1,11 +1,11 @@
 import React from "react";
 import styles from "./styles.module.scss";
 import cn from "classnames";
-import { useRecoilState } from "recoil";
-import { showNewDocFlowSelector } from "../../../state/selectors";
+import { useSetRecoilState } from "recoil";
+import { showNewDocFlowSelector } from "../../state/selectors";
 
 export const NewDocBtn = () => {
-  const [isNewDocFlowVisible, setNewDocFlowVisibility] = useRecoilState(showNewDocFlowSelector);
+  const setNewDocFlowVisibility = useSetRecoilState(showNewDocFlowSelector);
 
   return (
     <button

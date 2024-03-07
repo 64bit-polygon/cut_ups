@@ -48,7 +48,7 @@ export const showAuthAtom = atom({
 
 export const showNewDocFlowAtom = atom({
   key: "showNewDocFlowAtom",
-  default: false
+  default: null
 });
 
 export const documentsAtom = atom({

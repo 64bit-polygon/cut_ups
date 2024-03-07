@@ -9,5 +9,5 @@
   padding: 5px $PADDING 0;
   width: 100%;
   max-width: $DOC_COL_WIDTH + $PADDING * 2;
-  margin: 0 auto;
+  margin: 0 auto $DOC_BTN_GAP auto;
 }

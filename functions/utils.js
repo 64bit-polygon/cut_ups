@@ -47,6 +47,9 @@ export const wrapLines = lines => {
 };
 
 export const makeDocContent = (source1, source2) => {
+  if (!source1 && !source2) {
+    return '<span class="ql-font-romain ql-size-normal"> </span>';
+  }
   const source1Lines = makeLines(source1);
   const source2Lines = makeLines(source2);
   const combinedSources = combineSources(source1Lines, source2Lines);

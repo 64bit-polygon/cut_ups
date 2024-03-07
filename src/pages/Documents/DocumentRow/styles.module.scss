@@ -18,7 +18,7 @@
   display: flex;
   height: 100%;
   padding: 0 5px;
-  transition: opacity 300ms, transform 300ms;
+  transition: opacity 100ms, transform 100ms;
   transform-origin: center center;
 
   .documentRow.deleted & {

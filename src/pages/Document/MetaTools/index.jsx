@@ -7,13 +7,12 @@ export const MetaTools = ({
   showHowTo,
   areSourcesVisible,
   setSourcesVisibility,
-  hasMultipleSources
+  fileBtns
 }) => (
   <menu className={styles.tools}>
     <li>
       <IconBtn iconName="question" onClick={showHowTo}>Info</IconBtn>
     </li>
-  {hasMultipleSources && (
     <li>
       <IconBtn
         iconName={areSourcesVisible ? "sourcesHide" : "sourcesShow"}
@@ -22,9 +21,8 @@ export const MetaTools = ({
         {areSourcesVisible ? "hide sources" : "show sources"}
       </IconBtn>
     </li>
-  )}
     <li>
-      <IconBtn iconName="folder" onClick={showHowTo}>Info</IconBtn>
+      <FileMenu btns={fileBtns} />
     </li>
   </menu>
 );

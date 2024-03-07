@@ -1,6 +1,62 @@
 @import "../../../styles/colors.scss";
 
 .document {
+  position: relative;
   border: 1px solid $BTN_DARK;
   padding: 45px 70px;
+  min-height: 1500px;
+  cursor: text;
+}
+
+.showSources {
+  span[class="source1"] {
+    background-color: $SOURCE1;
+  }
+
+  span[class="source2"] {
+    background-color: $SOURCE2;
+  }
+}
+
+.content {
+  &.initFadeIn {
+    @keyframes fadeInContent {
+      0%   { opacity: 0 }
+      100% { opacity: 1 }
+    }
+    opacity: 0;
+    animation: fadeInContent 200ms 1000ms 1 forwards;
+  }
+
+  &.fadeIn.initFadeIn {
+    opacity: 1;
+  }
+}
+
+.loader {
+  position: absolute;
+  z-index: 1;
+  top: 45px;
+  bottom: 45px;
+  left: 70px;
+  right: 70px;
+  pointer-events: none;
+  background-image: url(/images/document-lines.svg);
+  background-size: 800px 206px;
+  background-repeat: repeat-y;
+  background-position: top right;
+  transition: opacity 200ms;
+
+  &.hidden {
+    opacity: 0;
+  }
+}
+
+.error {
+  font-family: "SimplonMono";
+}
+
+.errorLink {
+  color: $LINK;
+  text-decoration: underline;
 }

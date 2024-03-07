@@ -1,0 +1,37 @@
+@import "../../../styles/colors.scss";
+@import "../../../styles/variables.scss";
+
+.menu {
+  position: relative;
+}
+
+.menuHeader {
+  position: relative;
+  width: $DOC_BTN_SIZE;
+  height: $DOC_BTN_SIZE;
+  border: 1px solid $BTN_DARK;
+}
+
+.menuIcon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.menuContent {
+  position: absolute;
+  z-index: 10;
+  left: -20px;
+  top: -300px;
+  overflow: hidden;
+  padding: 0 20px 20px;
+
+  &.visible {
+    top: 28px;
+  }
+}
+
+.menuItem {
+  margin-top: $DOC_BTN_GAP;
+}

@@ -41,7 +41,7 @@ const Footer = () => (
       <polygon points="400,0 400,12 0,12" fill="#fff" />
     </svg>
   </div>
-)
+);
 
 export const DocumentsTable = ({ documents }) => {
   const [sortType, setSortType] = useState(BY_DATE);
@@ -50,7 +50,7 @@ export const DocumentsTable = ({ documents }) => {
   const [docIdConfirmDelete, setDeleteConfirmOnId] = useState();
   const [isDeleteDisabled, setIsDeleteDisabled] = useState();
   const [isLoaded, setIsLoaded] = useState(null);
-  
+
   useEffect(() => {
     if (!documents) return;
 
@@ -81,6 +81,9 @@ export const DocumentsTable = ({ documents }) => {
           defaultDirection={DESC}
         />
       )}
+      </div>
+      <div className={cn(styles.loaderWrap, {[styles.hidden]: documents !== null})}>
+        <div className={styles.loader} />
       </div>
       <div className={styles.mask}>
         <div style={{transitionDuration: 150 * (docsCnt ? docsCnt : 1) + "ms"}} className={cn(styles.innerWrap, {[styles.loaded]: isLoaded})}>

@@ -1,5 +1,7 @@
+const urlBase = "https://cut-ups.firebaseapp.com/api";
+
 export const makeNewDoc = async({userId, title, source1, source2}) => {
-  const url = "https://cut-ups.firebaseapp.com/api/make-document";
+  const url = `${urlBase}/make-document`;
   const options = {
     method: "POST",
     body: JSON.stringify({
@@ -15,25 +17,25 @@ export const makeNewDoc = async({userId, title, source1, source2}) => {
 }
 
 export const getIsEmailAvailable = async email => {
-  let response = await fetch(`https://cut-ups.firebaseapp.com/api/does-user-exist?email=${email}`);
+  let response = await fetch(`${urlBase}/does-user-exist?email=${email}`);
   response = await response.json();
   return response;
 }
 
 export const getSources = async () => {
-  let response = await fetch("https://cut-ups.firebaseapp.com/api/sources");
+  let response = await fetch(`${urlBase}/sources`);
   response = await response.json();
   return response;
 }
 
 export const getDocument = async (docId, userId) => {
-  let response = await fetch(`https://cut-ups.firebaseapp.com/api/get-document?docId=${docId}&userId=${userId}`);
+  let response = await fetch(`${urlBase}/get-document?docId=${docId}&userId=${userId}`);
   response = await response.json();
   return response;
 }
 
 export const getDocuments = async userId => {
-  let response = await fetch(`https://cut-ups.firebaseapp.com/api/get-documents?userId=${userId}`);
+  let response = await fetch(`${urlBase}/get-documents?userId=${userId}`);
   response = await response.json();
   return response;
 }
@@ -49,7 +51,7 @@ export const updateDocument = async ({userId, docId, title, content}) => {
     })
   }
 
-  const url = "https://cut-ups.firebaseapp.com/api/update-document";
+  const url = `${urlBase}/update-document`;
   let response = await fetch(url, options);
   response = await response.json();
   return response;
@@ -59,16 +61,15 @@ export const deleteDocuments = async ({userId, docIds, doesReturnDocs}) => {
   const options = {
     method: "POST",
     body: JSON.stringify({ userId, docIds, doesReturnDocs }),
-
   }
 
-  const url = "https://cut-ups.firebaseapp.com/api/delete-documents";
+  const url = `${urlBase}/delete-documents`;
   let response = await fetch(url, options);
   response = await response.json();
   return response;
 }
 
-export const deleteDocument = async ({userId, docId}) => {
+export const deleteDocument = async (docId, userId) => {
   const response = await deleteDocuments({userId, docIds: [docId], doesReturnDocs: true});
   return response;
 }
