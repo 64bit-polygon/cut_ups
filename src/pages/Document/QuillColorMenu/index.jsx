@@ -1,25 +1,27 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
-import styles from "./styles.module.scss";
-import { Icon } from "../../../components/Icon";
+import React, { useState, useRef, useCallback } from "react";
 import cn from "classnames";
-import useMutation from "../../../utils/useMutation";
-import { QuillColors } from "../QuillColors";
+import styles from "./styles.module.scss";
 import { isColorBrighterThan } from "../../../utils/colors.js"
+import useMutation from "../../../utils/useMutation";
+import { Icon } from "../../../components/Icon";
+import { QuillColors } from "../QuillColors";
 
-const defaultColor = "#000000";
-const gray = "#dddddd";
-const white = "#ffffff";
+const DEFAULT_COLOR = "#000000";
+const GRAY = "#dddddd";
+const WHITE = "#ffffff";
 
 export const QuillColorMenu = ({isBackground, name}) => {
-  const [color, setColor] = useState(defaultColor);
+  const [color, setColor] = useState(DEFAULT_COLOR);
   const [isMenuVisible, setIsMenuVisible] = useState();
   const menuRef = useRef();
 
   const onMenuChange = useCallback(
     (menuItems) => {
-      const selectedBtn = menuItems.find(menuItem => menuItem.target.classList.contains("ql-active"));
+      const selectedBtn = menuItems.find(
+        menuItem => menuItem.target.classList.contains("ql-active")
+      );
       const newColor = selectedBtn?.target?.value;
-      setColor(newColor ?? defaultColor);
+      setColor(newColor ?? DEFAULT_COLOR);
     },
     [setColor]
   );
@@ -36,9 +38,11 @@ export const QuillColorMenu = ({isBackground, name}) => {
 
   if (isBackground) {
     backgroundStyle = { backgroundColor: color };
-    fillStyle = { fill: isColorBrighterThan(color, 86) ? gray : white }
+    fillStyle = { fill: isColorBrighterThan(color, 86) ? GRAY : WHITE }
   } else {
-    backgroundStyle = { backgroundColor: isColorBrighterThan(color, 86) ? gray : white };
+    backgroundStyle = {
+      backgroundColor: isColorBrighterThan(color, 86) ? GRAY : WHITE
+    };
     fillStyle = { fill: color };
   }
 

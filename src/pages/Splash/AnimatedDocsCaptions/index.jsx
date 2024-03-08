@@ -8,11 +8,26 @@ const caption4MarkTime = 18500;
 const caption5MarkTime = 22000;
 
 const captions = [
-  { duration: caption2MarkTime, text: "make a cut up from two sources"},
-  { duration: caption3MarkTime - caption2MarkTime, text: "or start with a blank doc"},
-  { duration: caption4MarkTime - caption3MarkTime, text: "manipulate the text"},
-  { duration: caption5MarkTime - caption4MarkTime, text: "save to the cloud or download"},
-  { duration: null, text: "click the arrow to continue"}
+  {
+    duration: caption2MarkTime,
+    text: "make a cut up from two sources"
+  },
+  {
+    duration: caption3MarkTime - caption2MarkTime,
+    text: "or start with a blank doc"
+  },
+  {
+    duration: caption4MarkTime - caption3MarkTime,
+    text: "manipulate the text"
+  },
+  {
+    duration: caption5MarkTime - caption4MarkTime,
+    text: "save to the cloud or download"
+  },
+  {
+    duration: null,
+    text: "click the arrow to continue"
+  }
 ];
 
 const lastIndex = captions.length - 1;
@@ -48,8 +63,13 @@ export const AnimatedDocsCaptions = () => {
     }
   }, [captionIndex]);
 
+  const figcaptionClasses = cn(
+    styles.figcaption,
+    {[styles.noTransition]: isSkippedAhead}
+  );
+
   return (
-      <figcaption className={cn(styles.figcaption, {[styles.noTransition]: isSkippedAhead})}>
+      <figcaption className={figcaptionClasses}>
       {captions.map((caption, index) => 
         <div 
           className={cn(styles.caption, {[styles.visible]: index === captionIndex})}

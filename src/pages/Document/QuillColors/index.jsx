@@ -1,9 +1,18 @@
 import React from "react";
-import styles from "./styles.module.scss";
 import cn from "classnames";
+import styles from "./styles.module.scss";
 import { isColorBrighterThan } from "../../../utils/colors.js"
 
-const baseColors = ["000000", "FF0000", "FF6E0B", "FFFF00", "00FF00", "0000FF", "FF00FF"];
+const baseColors = [
+  "000000",
+  "FF0000",
+  "FF6E0B",
+  "FFFF00",
+  "00FF00",
+  "0000FF",
+  "FF00FF"
+];
+
 const whiteAddedColor = [0, 17, 34, 51, 68];
 const whiteAddedTonal = [0, 25, 50, 75, 100];
 
@@ -23,7 +32,9 @@ function addPercentageWhite(hexColor, percentage) {
 
 const colors = baseColors.reduce((allColors, baseColor) => {
   const whiteAdded = baseColor === "000000" ? whiteAddedTonal : whiteAddedColor;
-  const blendedColors = whiteAdded.map(whitePercent => addPercentageWhite(baseColor, whitePercent));
+  const blendedColors = whiteAdded.map(
+    whitePercent => addPercentageWhite(baseColor, whitePercent)
+  );
   return [...allColors, ...blendedColors];
 }, []);
 
@@ -37,7 +48,10 @@ export const QuillColors = ({quillClasses}) => (
           value={color}
           className={cn(styles.button, quillClasses)}
         />
-        <div className={cn(styles.color, {[styles.dark]: isColorBrighterThan(color, 70)})} style={{backgroundColor: color}} />
+        <div
+          className={cn(styles.color, {[styles.dark]: isColorBrighterThan(color, 70)})}
+          style={{backgroundColor: color}}
+        />
       </div>
     ))}
   </div>

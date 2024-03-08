@@ -1,11 +1,11 @@
 import React from "react";
-import styles from "./styles.module.scss";
 import cn from "classnames";
-import { useRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
+import styles from "./styles.module.scss";
 import { showAboutSelector } from "../../state/selectors";
 
 export const LogoBtn = () => {
-  const [isAuthVisible, setAuthVisibility] = useRecoilState(showAboutSelector);
+  const setAuthVisibility = useSetRecoilState(showAboutSelector);
 
   return (
     <button

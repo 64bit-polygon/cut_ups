@@ -1,18 +1,28 @@
 import React, { useRef } from "react";
-import styles from "./styles.module.scss";
 import cn from "classnames";
+import styles from "./styles.module.scss";
 import { TextBtn } from "../TextBtn";
 import { XBtn } from "../XBtn";
 
 export const ORIENTATION_LEFT = "left";
 
-export const InfoPage = ({ isVisible, heading, closePage, closeBtnText, children, showCloseTextBtn, orientation }) => {
+export const InfoPage = ({
+  isVisible,
+  heading,
+  closePage,
+  closeBtnText,
+  children,
+  showCloseTextBtn,
+  orientation
+}) => {
   const pageRef = useRef();
+
   const handleAnimationEnd = ev => {
     if (ev.animationName.includes("hide")) {
       pageRef.current.scrollTop = 0;
     }
   }
+
   const pageClasses = cn(
     styles.infoPage,
     styles[orientation],

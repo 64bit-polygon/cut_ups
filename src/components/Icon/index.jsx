@@ -1,5 +1,4 @@
 import React from "react";
-import styles from "./styles.module.scss";
 
 const NinePt = () => (
   <path d="M9.1,11.7c0-1.6,0.6-3,1.7-4.1c1.2-1.1,2.6-1.7,4.3-1.7s3.1,0.6,4.1,1.8c1,1.2,1.6,2.8,1.6,4.6c0,1.5-0.3,2.9-0.9,4.3

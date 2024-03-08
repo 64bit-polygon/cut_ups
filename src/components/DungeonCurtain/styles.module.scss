@@ -10,6 +10,10 @@
   background-color: $BACKGROUND;
   padding: 0 60px;
 
+  @media (max-width: 600px) {
+    padding: 0 20px;
+  }
+
   &::after {
     content: "";
     position: absolute;
@@ -53,6 +57,10 @@
   transform: rotate(90deg);
   width: 116px;
   height: 13px;
+
+  @media (max-width: 600px) {
+    right: -47px;
+  }
 
   &::before,
   &::after {

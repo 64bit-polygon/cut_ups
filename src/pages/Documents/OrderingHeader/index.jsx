@@ -1,10 +1,7 @@
 import React from "react";
 import styles from "./styles.module.scss";
 import { SortOrderBtn } from "../SortOrderBtn";
-import {
-  BY_DATE,
-  BY_TITLE
-} from "../DocumentsTable";
+import { BY_DATE, BY_TITLE } from "../DocumentsTable";
 
 export const OrderingHeader = ({ setType, setDirection, defaultDirection }) => (
   <div className={styles.headers}>

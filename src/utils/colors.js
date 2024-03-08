@@ -7,5 +7,6 @@ export const isColorBrighterThan = (hexColor, brightnessPercentage) => {
   
   let brightness = (r * 299 + g * 587 + b * 114) / 1000;
   brightness = brightness / 255 * 100;
+  
   return brightness > brightnessPercentage;
 }

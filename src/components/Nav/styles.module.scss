@@ -1,5 +1,4 @@
 .nav {
-
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -7,15 +6,15 @@
 }
 
 .logoBtn {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   cursor: pointer;
-  z-index: 10000;
+  z-index: 100;
 }
 
 .navControls {
-  position: fixed;
+  position: absolute;
   top: 0;
   right: 0;
 }

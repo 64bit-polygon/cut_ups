@@ -1,9 +1,14 @@
 import React from "react";
-import styles from "./styles.module.scss";
 import cn from "classnames";
 import { Link } from "react-router-dom";
+import styles from "./styles.module.scss";
 
-export const TextBtnLink = ({ to, children, small, bordered }) => {
+export const TextBtnLink = ({
+  to,
+  children,
+  small,
+  bordered
+}) => {
   const btnClasses = cn(
     "invertText",
     styles.textBtn,
@@ -11,7 +16,8 @@ export const TextBtnLink = ({ to, children, small, bordered }) => {
       [styles.small]: small,
       [styles.bordered]: bordered
     }
-  )
+  );
+  
   return (
     <Link className={btnClasses} to={to}>
       { children }

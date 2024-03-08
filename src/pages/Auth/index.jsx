@@ -1,11 +1,11 @@
 import React from "react";
+import cn from "classnames";
+import { useRecoilState } from "recoil";
 import styles from "./styles.module.scss";
+import { showAuthSelector } from "../../state/selectors";
 import { DungeonCurtain } from "../../components/DungeonCurtain";
 import { XBtn } from "../../components/XBtn";
 import { AuthForm } from "../../components/AuthForm";
-import cn from "classnames";
-import { useRecoilState } from "recoil";
-import { showAuthSelector } from "../../state/selectors";
 
 const Auth = () => {
   const [isAuthVisible, setAuthVisibility] = useRecoilState(showAuthSelector);

@@ -1,30 +1,32 @@
 import React from "react";
 import styles from "./styles.module.scss";
 import cn from "classnames";
-import { useRecoilState } from "recoil";
-import {
-  TEXT_INPUT,
-  USER_SELECTION
-} from "../../../state/atoms";
 import { PublishedSources } from "../PublishedSources";
 
-export const SourceInterface = ({ selector, name, label }) => {
-  const [sourceInfo, setSourceInfo] = useRecoilState(selector);
-  const updateSelection = (key, value) => setSourceInfo({...sourceInfo, [key]: value});
-  const isUntouched = !sourceInfo.selectionType;
+export const TEXT_INPUT = "text";
+export const USER_SELECTION = "userSelection";
+
+export const SourceInterface = ({
+  source,
+  setSource,
+  name,
+  label
+}) => {
+  const updateSelection = (key, value) => setSource({...source, [key]: value});
+  const isUntouched = !source.selectionType;
 
   const textInputBtnClasses = cn(
     styles.sourceBtn,
     styles.textInputBtn,
-    {[styles.visible]: sourceInfo.selectionType === USER_SELECTION},
-    {[styles.notVisible]: sourceInfo.selectionType === TEXT_INPUT}
+    {[styles.visible]: source.selectionType === USER_SELECTION},
+    {[styles.notVisible]: source.selectionType === TEXT_INPUT}
   );
 
   const publishedSrcsBtnClasses = cn(
     styles.sourceBtn,
     styles.publishedSrcsBtn,
-    {[styles.visible]: sourceInfo.selectionType === TEXT_INPUT},
-    {[styles.notVisible]: sourceInfo.selectionType === USER_SELECTION}
+    {[styles.visible]: source.selectionType === TEXT_INPUT},
+    {[styles.notVisible]: source.selectionType === USER_SELECTION}
   );
 
   const textInputSrcClasses = cn(
@@ -39,7 +41,7 @@ export const SourceInterface = ({ selector, name, label }) => {
     styles.sourceWrap,
     styles.publishedSrcsWrap,
     {
-      [styles.focused]: sourceInfo.selectionType === USER_SELECTION,
+      [styles.focused]: source.selectionType === USER_SELECTION,
       [styles.untouched]: isUntouched
     }
   );
@@ -75,7 +77,7 @@ export const SourceInterface = ({ selector, name, label }) => {
       >
         <textarea
           name={`${name}-${label}`}
-          value={sourceInfo.userText}
+          value={source.userText}
           className={styles.textarea}
           placeholder="input / paste text"
           onChange={ev => updateSelection("userText", ev.target.value)}
@@ -90,7 +92,7 @@ export const SourceInterface = ({ selector, name, label }) => {
           <PublishedSources
             name={name}
             onChange={id => updateSelection("id", id)}
-            value={sourceInfo.id} />
+            value={source.id} />
         </div>
       </div>
     </div>

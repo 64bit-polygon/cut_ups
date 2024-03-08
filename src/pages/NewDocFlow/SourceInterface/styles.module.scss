@@ -46,6 +46,14 @@
   box-shadow: 1px 1px 0 $BTN_DARK;
   transition: color 200ms, background-color 200ms;
   white-space: nowrap;
+
+  @media( max-width: 450px ) {
+    font-size: 35px;
+  }
+
+  @media( max-width: 350px ) {
+    font-size: 25px;
+  }
   
   .sounceInterface:hover & {
     color: $BTN_LIGHT;
@@ -149,6 +157,10 @@
 
   &.textInputSrcWrap {
     padding: 10px 0 0 20px;
+
+    @media( max-width: 500px ) {
+      padding: 3px 0 0 0;
+    }
   }
 
   &.publishedSrcsWrap {

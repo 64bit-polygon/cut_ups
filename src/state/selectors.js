@@ -1,9 +1,6 @@
 import { selector } from "recoil";
 import {
   sourcesAtom,
-  newDocSource1,
-  newDocSource2,
-  newDocMeta,
   userAtom,
   showAboutAtom,
   showAuthAtom,
@@ -25,36 +22,6 @@ export const sourcesSelector = selector({
   },
   get: ({ get }) => {
     return get(sourcesAtom);
-  }
-});
-
-export const newDocSource1Selector = selector({
-  key: "newDocSource1Selector",
-  set: ({ set }, data) => {
-    set(newDocSource1, data);
-  },
-  get: ({ get }) => {
-    return get(newDocSource1);
-  }
-});
-
-export const newDocSource2Selector = selector({
-  key: "newDocSource2Selector",
-  set: ({ set }, data) => {
-    set(newDocSource2, data);
-  },
-  get: ({ get }) => {
-    return get(newDocSource2);
-  }
-});
-
-export const newDocMetaSelector = selector({
-  key: "newDocMetaSelector",
-  set: ({ set }, data) => {
-    set(newDocMeta, data);
-  },
-  get: ({ get }) => {
-    return get(newDocMeta);
   }
 });
 

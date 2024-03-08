@@ -1,11 +1,15 @@
 import React, { useEffect, useState, useCallback } from "react";
-import styles from "./styles.module.scss";
-import { useRecoilValue } from "recoil";
-import { userSelector } from "../../state/selectors";
+import { useRecoilValue, useSetRecoilState, useRecoilState } from "recoil";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
+import HtmlToRtfBrowser from "html-to-rtf-browser";
+import { saveAs } from "file-saver";
+import styles from "./styles.module.scss";
+import {
+  userSelector,
+  showNewDocFlowSelector,
+  documentsSelector
+} from "../../state/selectors";
 import { getDocument, updateDocument, deleteDocument } from "../../utils/api.js"
-import { showNewDocFlowSelector, documentsSelector } from "../../state/selectors";
-import { useSetRecoilState, useRecoilState } from "recoil";
 import { HowTo } from "./HowTo";
 import { Toolbar } from "./Toolbar";
 import { DocumentTitle } from "./DocumentTitle";
@@ -13,10 +17,8 @@ import { DocumentEditor } from "./DocumentEditor";
 import { MetaTools } from "./MetaTools";
 import { Toast } from "../../components/Toast";
 import { ConfirmDelete } from "./ConfirmDelete";
-import HtmlToRtfBrowser from "html-to-rtf-browser";
-import { saveAs } from "file-saver";
 
-var htmlToRtf = new HtmlToRtfBrowser();
+const htmlToRtf = new HtmlToRtfBrowser();
 
 const SAVING_TEXT = "saving";
 const ERROR_TEXT = "could not save : /";
@@ -24,19 +26,22 @@ const ERROR_TEXT = "could not save : /";
 const Document = () => {
   const [isNewDocFlowVisibile, setNewDocFlowVisibility] = useRecoilState(showNewDocFlowSelector);
   const setDocuments = useSetRecoilState(documentsSelector);
+  const user = useRecoilValue(userSelector);
+
   const [editorContent, setEditorContent] = useState(null);
   const [docTitle, setDocTitle] = useState(null);
   const [loadingErrorCode, setLoadingErrorCode] = useState();
   const [showHowTo, setShowHowTo] = useState();
   const [areSourcesVisible, setSourcesVisibility] = useState();
-  const { docId } = useParams();
-  const user = useRecoilValue(userSelector);
-  const navigate = useNavigate();
+
   const [isToastVisible, setToastVisibility] = useState();
   const [toastText, setToastText] = useState();
   const [isLoaded, setIsLoaded] = useState();
   const [isDeleteScreenVisible, setIsDeleteScreenVisible] = useState();
   const [isDeleting, setIsDeleting] = useState();
+
+  const { docId } = useParams();
+  const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {
@@ -56,8 +61,14 @@ const Document = () => {
     setToastVisibility(true);
 
     try {
-      const docInfo = await updateDocument({userId: user.userId, docId, title: docTitle, content: editorContent});
-      const message = docInfo.isErrored ? ERROR_TEXT : "saved"
+      const docInfo = await updateDocument({
+        userId: user.userId,
+        docId,
+        title: docTitle,
+        content: editorContent
+      });
+      const message = docInfo.isErrored ? ERROR_TEXT : "saved";
+
       handleToastClose(message);
     } catch (error) {
       console.log("error", error);
@@ -88,47 +99,47 @@ const Document = () => {
   }, [user]);
 
   useEffect(() => {
-    if (docId && user?.userId) {
-      const getDoc = async () => {
-        try {
-          const docInfo = await getDocument(docId, user.userId);
-          if (docInfo.code === 404) throw new Error("404");
-          const { content, title } = docInfo.data;
-          setEditorContent(content);
-          setDocTitle(title);
-          setNewDocFlowVisibility(false);
-          setIsLoaded(true);
-        } catch (error) {
-          const is404 = error.message === "404";
-          setLoadingErrorCode(is404 ? 404 : 500);
-          setDocTitle(is404 ? "404 Error" : "Server Error");
-          setIsLoaded(true);
-        }
-      };
-      
-      getDoc();
-    }
+    if (!docId || !user?.userId) return;
+
+    const getDoc = async () => {
+      try {
+        const docInfo = await getDocument(docId, user.userId);
+        if (docInfo.code === 404) throw new Error("404");
+        const { content, title } = docInfo.data;
+        setEditorContent(content);
+        setDocTitle(title);
+        setNewDocFlowVisibility(false);
+        setIsLoaded(true);
+      } catch (error) {
+        const is404 = error.message === "404";
+        setLoadingErrorCode(is404 ? 404 : 500);
+        setDocTitle(is404 ? "404 Error" : "Server Error");
+        setIsLoaded(true);
+      }
+    };
+    
+    getDoc();
   }, [docId, user]);
 
   useEffect(() => {
-    if (isDeleting) {
-      const deleteDoc = async () => {
-        try {
-          const docInfo = await deleteDocument(docId, user.userId);
-          if (!docInfo.data.didDelete) throw new Error("could not delete document");
-          const docs = docInfo.data.remainingDocs;
-          setDocuments(docs);
-          navigate("/documents");
-        } catch (error) {
-          setIsDeleting(false);
-          setToastVisibility(true);
-          setToastText("could not delete document");
-          setTimeout(() => setToastVisibility(false), 5000);
-        }
-      };
-      
-      deleteDoc();
-    }
+    if (!isDeleting) return;
+
+    const deleteDoc = async () => {
+      try {
+        const docInfo = await deleteDocument(docId, user.userId);
+        if (!docInfo.data.didDelete) throw new Error("could not delete document");
+        const docs = docInfo.data.remainingDocs;
+        setDocuments(docs);
+        navigate("/documents");
+      } catch (error) {
+        setIsDeleting(false);
+        setToastVisibility(true);
+        setToastText("could not delete document");
+        setTimeout(() => setToastVisibility(false), 5000);
+      }
+    };
+    
+    deleteDoc();
   }, [isDeleting]);
 
   useEffect(() => {
@@ -250,7 +261,12 @@ const Document = () => {
         isDeleting={isDeleting}
         setIsDeleting={setIsDeleting}
       />
-      <Toast isVisible={isToastVisible} showDots={toastText === SAVING_TEXT}>{toastText}</Toast>
+      <Toast
+        isVisible={isToastVisible}
+        showDots={toastText === SAVING_TEXT}
+      >
+        {toastText}
+      </Toast>
     </div>
   );
 };

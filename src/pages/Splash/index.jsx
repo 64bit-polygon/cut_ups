@@ -1,12 +1,12 @@
 import React from "react";
-import styles from "./styles.module.scss";
-import { AnimatedDocs } from "./AnimatedDocs";
 import cn from "classnames";
-import { useRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
+import styles from "./styles.module.scss";
 import { showNewDocFlowSelector } from "../../state/selectors";
+import { AnimatedDocs } from "./AnimatedDocs";
 
 const Splash = () => {
-  const [isNewDocFlowVisible, setNewDocFlowVisibility] = useRecoilState(showNewDocFlowSelector);
+  const setNewDocFlowVisibility = useSetRecoilState(showNewDocFlowSelector);
 
   return (
     <div className={styles.splash}>

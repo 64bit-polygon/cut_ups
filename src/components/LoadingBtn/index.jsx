@@ -1,6 +1,6 @@
 import React from "react";
-import styles from "./styles.module.scss";
 import cn from "classnames";
+import styles from "./styles.module.scss";
 import { ErrorMessage } from "../ErrorMessage";
 
 export const LoadingBtn = ({
@@ -31,7 +31,9 @@ export const LoadingBtn = ({
         onClick={onClick}
         type="button"
       >
-        <span className={cn(styles.btnContent, {[styles.hidden]: isLoading})}>{children}</span>
+        <span className={cn(styles.btnContent, {[styles.hidden]: isLoading})}>
+          {children}
+        </span>
       </button>
     {error && (
       <div className={styles.errorWrap}>

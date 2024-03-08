@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import styles from "./styles.module.scss";
 import cn from "classnames";
+import styles from "./styles.module.scss";
 import { FontMenu } from "../FontMenu";
 import { FontSizeMenu } from "../FontSizeMenu";
 import { AlignmentMenu } from "../AlignmentMenu";
@@ -17,7 +17,10 @@ export const Toolbar = ({ id }) => {
       onMouseLeave={() => setIsMenuVisible(false)}
     >
       <div className={cn(styles.showMenu, {[styles.visible]: !isMenuVisible})} />
-      <menu className={cn(styles.options, {[styles.visible]: isMenuVisible})} id={id}>
+      <menu
+        className={cn(styles.options, {[styles.visible]: isMenuVisible})}
+        id={id}
+      >
         <li className={styles.option}>
           <FontMenu />
         </li>

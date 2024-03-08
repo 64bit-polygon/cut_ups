@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from "react";
-import styles from "./styles.module.scss";
-import { NewDocBtn } from "../../components/NewDocBtn";
 import { useSetRecoilState, useRecoilValue } from "recoil";
-import { showNewDocFlowSelector, sourcesSelector, userSelector } from "../../state/selectors";
+import styles from "./styles.module.scss";
+import {
+  showNewDocFlowSelector,
+  sourcesSelector,
+  userSelector
+} from "../../state/selectors";
+import { NewDocBtn } from "../../components/NewDocBtn";
 
 const NewDoc = () => {
-  const [hasOpened, setHasOpened] = useState(false);
   const setShowNewDocFlow = useSetRecoilState(showNewDocFlowSelector);
   const sources = useRecoilValue(sourcesSelector);
   const user = useRecoilValue(userSelector);
+  const [hasOpened, setHasOpened] = useState(false);
 
   useEffect(() => {
     if ( sources !== null && user !== null && !hasOpened ) {

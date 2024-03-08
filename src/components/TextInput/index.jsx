@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import styles from "./styles.module.scss";
 import cn from "classnames";
+import styles from "./styles.module.scss";
 import { ErrorMessage } from "../ErrorMessage";
 
 export const TextInput = ({
@@ -16,10 +16,24 @@ export const TextInput = ({
   errorMessage
 }) => {
   const [showText, setShowText] = useState(() => !isSecret);
+
   const toggleShowText = () => setShowText(!showText);
+  const inputWrapClasses = cn(
+    styles.inputWrap,
+    {
+      [styles.errored]: errored,
+      [styles.disabled]: disabled
+    }
+  );
+
+  const secretBtnClasses = cn(
+    "hideText invertingImgBtn",
+    styles.passwordToggle,
+    {[styles.hidePassword]: showText}
+  )
 
   return (
-    <div className={cn(styles.inputWrap, {[styles.errored]: errored, [styles.disabled]: disabled})}>
+    <div className={inputWrapClasses}>
       <input
         type={showText ? "text" : "password"}
         className={cn(styles.input, {[styles.errored]: errored})}
@@ -41,7 +55,7 @@ export const TextInput = ({
     )}
     {isSecret && (
       <button
-        className={cn("hideText invertingImgBtn", styles.passwordToggle, {[styles.hidePassword]: showText})}
+        className={secretBtnClasses}
         onClick={toggleShowText}
         type="button"
       >

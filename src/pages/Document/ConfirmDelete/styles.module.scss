@@ -39,7 +39,7 @@
     width: 1px;
     height: $HEIGHT;
     background-color: $DARK;
-    transform-origin: $HEIGHT / 2;
+    transform-origin: calc($HEIGHT / 2);
     transform: rotate(36deg);
     right: -18px;
     top: 7px;

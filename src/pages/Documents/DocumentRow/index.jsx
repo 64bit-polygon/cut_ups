@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import styles from "./styles.module.scss";
-import cn from "classnames";
-import { RouterLink } from "../../../components/RouterLink";
 import moment from "moment";
-import { useRecoilState, useRecoilValue } from "recoil";
+import cn from "classnames";
+import { useSetRecoilState, useRecoilValue } from "recoil";
+import styles from "./styles.module.scss";
 import { documentsSelector, userSelector } from "../../../state/selectors";
 import { deleteDocument } from "../../../utils/api.js"
+import { RouterLink } from "../../../components/RouterLink";
 
 const isToday = date => moment().isSame(date, "day");
 
@@ -49,7 +49,7 @@ export const DocumentRow = ({
   isDeleteDisabled,
   setIsDeleteDisabled
 }) => {
-  const [documents, setDocuments] = useRecoilState(documentsSelector);
+  const setDocuments = useSetRecoilState(documentsSelector);
   const user = useRecoilValue(userSelector);
   const [isDeleted, setIsDeleted] = useState();
   const [errorMessage, setErrorMessage] = useState();
@@ -88,11 +88,27 @@ export const DocumentRow = ({
 
   const isLinkDisabled = isProcessing || isDeleted || !!errorMessage;
 
+  const docInfoClasses = cn(
+    styles.docInfo,
+    styles.confirmDeleteInfo,
+    {[styles.visible]: isConfirmDeleteVisibile}
+  );
+
+  const deleteBtnClasses = cn(
+    styles.deleteFlowBtn,
+    styles.interactiveText,
+    {[styles.disabled]: isDeleteDisabled}
+  );
+
   return (
     <div className={cn(styles.documentRow, {[styles.deleted]: isDeleted})}>
       <div className={styles.docInfo}>
         <div className={cn(styles.col, styles.col1)}>
-          <RouterLink to={`/documents/${docId}`} className={styles.titleLink} isDisabled={isLinkDisabled}>
+          <RouterLink
+            to={`/documents/${docId}`}
+            className={styles.titleLink}
+            isDisabled={isLinkDisabled}
+          >
             <span className={styles.interactiveText}>
               {title}
             </span>
@@ -114,11 +130,11 @@ export const DocumentRow = ({
         </div>
       </div>
       <div className={styles.contentMask}>
-        <div className={cn(styles.docInfo, styles.confirmDeleteInfo, {[styles.visible]: isConfirmDeleteVisibile})}>
+        <div className={docInfoClasses}>
           <div className={cn(styles.col, styles.col2)}>
             <button
               type="button"
-              className={cn(styles.deleteFlowBtn, styles.interactiveText, {[styles.disabled]: isDeleteDisabled})}
+              className={deleteBtnClasses}
               onClick={handleDeleteBtnClick}
             >
               Confirm delete

@@ -1,11 +1,12 @@
 import React from "react";
+import { useLocation } from "react-router-dom";
 import styles from "./styles.module.scss";
 import { LogoBtn } from "../LogoBtn";
 import { NavControls } from "../NavControls";
-import { useLocation } from "react-router-dom";
 
 export const Nav = () => {
   const location = useLocation();
+  
   const showAuthControls = location.pathname !== "/login";
 
   return (

@@ -1,6 +1,6 @@
 import React from "react";
-import styles from "./styles.module.scss";
 import { useRecoilValue } from "recoil";
+import styles from "./styles.module.scss";
 import { sourcesSelector } from "../../../state/selectors";
 
 export const PublishedSources = ({ onChange, name, value }) => {
@@ -21,10 +21,14 @@ export const PublishedSources = ({ onChange, name, value }) => {
             checked={value === source.id}
             onChange={() => onChange(source.id)}
           />
-          <span htmlFor={source.id} className={styles.label}>{source.title}</span>
+          <span
+            htmlFor={source.id}
+            className={styles.label}
+          >
+            {source.title}
+          </span>
         </label>
       ))}
     </fieldset>
   );
 };
-

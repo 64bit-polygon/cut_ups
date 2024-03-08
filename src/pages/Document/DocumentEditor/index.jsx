@@ -1,26 +1,14 @@
 import React, { useState, useEffect, useRef } from "react";
-import styles from "./styles.module.scss";
 import ReactQuill, { Quill } from "react-quill";
+import { Link } from "react-router-dom";
+import cn from "classnames";
+import styles from "./styles.module.scss";
 import "./quill.scss";
 import { fontWhitelist } from "../FontMenu";
 import { fontSizeWhitelist } from "../FontSizeMenu";
-import { Link } from "react-router-dom";
-import cn from "classnames";
 
-const Error = errorCode => {
-  const is404 = errorCode === 404;
-  return (
-    <div className={styles.error}>
-      <div className={styles.errorMessage}>
-      {is404
-        ? "We couldn't find your document, double check the url to ensure it's correct."
-        : "There was an error getting your document, try refreshing the page."
-      }
-      </div>
-      <Link to="/documents" className={styles.errorLink}>my docs</Link>
-    </div>
-  )
-};
+const ERROR_404 = "We couldn't find your document, double check the url to ensure it's correct.";
+const ERROR_GENERIC = "There was an error getting your document, try refreshing the page.";
 
 const Inline = Quill.import("blots/inline");
 
@@ -32,6 +20,7 @@ class Source1 extends Inline {
     return true;
   }
 }
+
 Quill.register(Source1);
 
 class Source2 extends Inline {
@@ -42,6 +31,7 @@ class Source2 extends Inline {
     return true;
   }
 }
+
 Quill.register(Source2);
 
 const fontSizeStyle = Quill.import("attributors/class/size");
@@ -66,6 +56,15 @@ const quillFormats = [
   "source2"
 ];
 
+const Error = errorCode => (
+  <div className={styles.error}>
+    <div className={styles.errorMessage}>
+    {errorCode === 404 ? ERROR_404: ERROR_GENERIC}
+    </div>
+    <Link to="/documents" className={styles.errorLink}>my docs</Link>
+  </div>
+);
+
 export const DocumentEditor = ({
   value,
   setContent,
@@ -88,23 +87,37 @@ export const DocumentEditor = ({
     }
   };
 
-  const handleChange = ev => {
-    setContent(ev)
-  }
+  const handleChange = ev => setContent(ev);
 
   const handleClick = ev => {
     if (!ev.target.classList.contains("documentEditor")) return;
     textEditorRef.current.focus();
   }
 
+  const documentClasses = cn(
+    styles.document,
+    "documentEditor",
+    {[styles.showSources]: showSplitSources}
+  );
+
+  const contentClasses = cn(
+    styles.content,
+    {
+      [styles.initFadeIn]: hasInitFadeIn,
+      [styles.fadeIn]: fadeIn
+    }
+  );
+
   return (
     <div
-      className={cn(styles.document, "documentEditor", {[styles.showSources]: showSplitSources})}
+      className={documentClasses}
       onClick={handleClick}
     >
       <div className={cn(styles.loader, {[styles.hidden]: isLoaded})} />
-      { loadingErrorCode &&  <Error errorCode={loadingErrorCode} />}
-      <div className={cn(styles.content, {[styles.initFadeIn]: hasInitFadeIn, [styles.fadeIn]: fadeIn})}>
+    {loadingErrorCode && (
+      <Error errorCode={loadingErrorCode} />
+    )}
+      <div className={contentClasses}>
         <ReactQuill
           theme="snow"
           value={value}

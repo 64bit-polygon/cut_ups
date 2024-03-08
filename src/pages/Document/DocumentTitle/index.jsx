@@ -1,8 +1,13 @@
 import React from "react";
-import styles from "./styles.module.scss";
 import cn from "classnames";
+import styles from "./styles.module.scss";
 
-export const DocumentTitle = ({ value, isLoaded, setTitle, disabled }) => (
+export const DocumentTitle = ({
+  value,
+  isLoaded,
+  setTitle,
+  disabled
+}) => (
   <div className={cn(styles.titleWrap, {[styles.loaded]: isLoaded})}>
     <input
       className={styles.title}

@@ -26,4 +26,10 @@ const fontButtons = [
   }
 ]
 
-export const AlignmentMenu = () => <QuillMenu defaultIconName="alignment" buttons={fontButtons} name="alignment" />
+export const AlignmentMenu = () => (
+  <QuillMenu
+    defaultIconName="alignment"
+    buttons={fontButtons}
+    name="alignment"
+  />
+);

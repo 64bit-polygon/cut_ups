@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useRef, useCallback } from "react";
+import cn from "classnames";
 import styles from "./styles.module.scss";
+import useMutation from "../../../utils/useMutation";
 import { Icon } from "../../../components/Icon";
 import { QuillBtn } from "../QuillBtn";
-import cn from "classnames";
-import useMutation from "../../../utils/useMutation";
 
 export const QuillMenu = ({defaultIconName, buttons, name}) => {
   const [selectedIconName, setSelectedIconName] = useState(defaultIconName);
@@ -12,7 +12,9 @@ export const QuillMenu = ({defaultIconName, buttons, name}) => {
 
   const onMenuChange = useCallback(
     (menuItems) => {
-      const selectedBtn = menuItems.find(menuItem => menuItem.target.classList.contains("ql-active"));
+      const selectedBtn = menuItems.find(
+        menuItem => menuItem.target.classList.contains("ql-active")
+      );
       const newSelectedIcon = selectedBtn?.target?.dataset?.iconname;
       setSelectedIconName(newSelectedIcon ?? defaultIconName);
     },
@@ -31,7 +33,11 @@ export const QuillMenu = ({defaultIconName, buttons, name}) => {
   );
 
   return (
-    <div className={menuClasses} onMouseEnter={showMenu} onMouseLeave={hideMenu}>
+    <div
+      className={menuClasses}
+      onMouseEnter={showMenu}
+      onMouseLeave={hideMenu}
+    >
       <div className={styles.menuHeader}>
         <div className={cn("hideText", styles.menuLabel)}>{name}</div>
         <Icon name={selectedIconName} className={styles.menuIcon} />

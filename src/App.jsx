@@ -1,33 +1,30 @@
 import React, { useEffect } from "react";
-import "./index.scss";
-import { SiteWrap } from "./components/SiteWrap";
-import { useRecoilState } from "recoil";
-import {
-  sourcesSelector,
-  userSelector
-} from "./state/selectors";
-import { Router } from "./components/Router";
 import { initializeApp } from "firebase/app";
-import firebaseConfig from "./firebaseConfig";
 import { getAuth } from "firebase/auth";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import "./index.scss";
+import { sourcesSelector, userSelector } from "./state/selectors";
 import { getSources as getDbSources } from "./utils/api.js";
+import { SiteWrap } from "./components/SiteWrap";
+import { Router } from "./components/Router";
+import firebaseConfig from "./firebaseConfig";
 
 const firebaseApp = initializeApp(firebaseConfig);
 const auth = getAuth(firebaseApp);
 
 function App() {
   const [sources, setSources] = useRecoilState(sourcesSelector);
-  const [user, setUser] = useRecoilState(userSelector);
+  const setUser = useSetRecoilState(userSelector);
 
   useEffect(() => {
-    if (!sources) {
-      const getSources = async () => {
-        const response = await getDbSources();
-        setSources(response.data.sources);
-      };
+    if (sources) return;
 
-      getSources();
-    }
+    const getSources = async () => {
+      const response = await getDbSources();
+      setSources(response.data.sources);
+    };
+
+    getSources();
   }, []);
 
   useEffect(() => {
@@ -45,4 +42,4 @@ function App() {
   );
 }
 
-export default App
+export default App;

@@ -1,8 +1,13 @@
 import React from "react";
-import styles from "./styles.module.scss";
 import cn from "classnames";
+import styles from "./styles.module.scss";
 
-export const TextBtn = ({ onClick, children, small, bordered }) => {
+export const TextBtn = ({
+  onClick,
+  children,
+  small,
+  bordered
+}) => {
   const btnClasses = cn(
     "invertText",
     styles.textBtn,
@@ -10,14 +15,14 @@ export const TextBtn = ({ onClick, children, small, bordered }) => {
       [styles.small]: small,
       [styles.bordered]: bordered
     }
-  )
+  );
+
   return (
     <button className={btnClasses} onClick={onClick} type="button">
       { children }
     </button>
   )
 }
-
 
 TextBtn.defaultProps = {
   onClick: () => {},

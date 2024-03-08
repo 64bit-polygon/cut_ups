@@ -1,13 +1,20 @@
 import React from "react";
-import styles from "./styles.module.scss";
 import cn from "classnames";
+import styles from "./styles.module.scss";
 
-export const XBtn = ({ onClick, isVisible }) => (
-  <button
-    className={cn("invertingImgBtn hideText", styles.xBtn, {[styles.visible]: isVisible})}
-    onClick={onClick}
-    type="button"
-  >
+export const XBtn = ({ onClick, isVisible }) => {
+  const classes = cn(
+    "invertingImgBtn hideText",
+    styles.xBtn,
+    {[styles.visible]: isVisible}
+  )
+  return (
+    <button
+      className={classes}
+      onClick={onClick}
+      type="button"
+    >
     close
   </button>
-);
+  )
+};

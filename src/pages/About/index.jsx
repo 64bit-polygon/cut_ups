@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
 import { useRecoilState } from "recoil";
-import { InfoPage } from "../../components/InfoPage";
+import { useLocation } from "react-router-dom";
 import { showAboutSelector } from "../../state/selectors";
-import { useLocation } from 'react-router-dom';
+import { InfoPage } from "../../components/InfoPage";
 
 const About = () => {
   const [isVisible, setVisibility] = useRecoilState(showAboutSelector);
   const location = useLocation();
+
   useEffect(() => {
     if (isVisible) {
       setVisibility(false);
@@ -14,7 +15,11 @@ const About = () => {
   }, [location]);
 
   return (
-    <InfoPage isVisible={isVisible} heading="About" closePage={() => setVisibility(false)}>
+    <InfoPage
+      isVisible={isVisible}
+      heading="About"
+      closePage={() => setVisibility(false)}
+    >
       <>
         <h3>What is this?</h3>
         <p>

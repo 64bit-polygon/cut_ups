@@ -1,8 +1,13 @@
 import React from "react";
-import styles from "./styles.module.scss";
 import cn from "classnames";
+import styles from "./styles.module.scss";
 
-export const DungeonCurtain = ({ children, index, curtainCount, isScrollable }) => {
+export const DungeonCurtain = ({
+  children,
+  index,
+  curtainCount,
+  isScrollable
+}) => {
   const hasIndexLabel = index && curtainCount;
   return (
     <div className={cn(styles.dungeonCurtain, styles[`num${index}`])}>

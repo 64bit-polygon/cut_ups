@@ -1,22 +1,15 @@
 import React from "react";
-import styles from "./styles.module.scss";
-import {
-  userSelector,
-  showAuthSelector
-} from "../../state/selectors";
-import { TextBtn } from "../TextBtn";
-import { TextBtnLink } from "../TextBtnLink";
-import {
-  useRecoilState,
-  useRecoilValue
-} from "recoil";
+import { useSetRecoilState, useRecoilValue } from "recoil";
 import { getAuth, signOut } from "firebase/auth";
 import { useNavigate, useLocation } from "react-router-dom";
+import styles from "./styles.module.scss";
+import { userSelector, showAuthSelector } from "../../state/selectors";
+import { TextBtn } from "../TextBtn";
+import { TextBtnLink } from "../TextBtnLink";
 
 export const NavControls = () => {
   const user = useRecoilValue(userSelector);
-  const [isAuthVisible, setAuthVisibility] = useRecoilState(showAuthSelector);
-
+  const setAuthVisibility = useSetRecoilState(showAuthSelector);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -24,10 +17,11 @@ export const NavControls = () => {
     try {
       const auth = getAuth();
       await signOut(auth);
-      navigate("/");
     } catch (error) {
       console.log("error signing out:", error);
     }
+
+    navigate("/");
   }
 
   if (user === null) return null;

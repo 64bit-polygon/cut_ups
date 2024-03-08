@@ -1,10 +1,18 @@
 import React, { useEffect } from "react";
-import styles from "./styles.module.scss";
 import cn from "classnames";
-import { useRecoilValue, useSetRecoilState, useRecoilState } from "recoil";
+import {
+  useRecoilValue,
+  useSetRecoilState,
+  useRecoilState
+} from "recoil";
 import { useNavigate } from "react-router-dom";
+import styles from "./styles.module.scss";
+import {
+  userSelector,
+  showAuthSelector,
+  documentsSelector
+} from "../../state/selectors";
 import { getDocuments } from "../../utils/api.js"
-import { userSelector, showAuthSelector, documentsSelector } from "../../state/selectors";
 import { DocumentsTable } from "./DocumentsTable";
 import { NewDocBtn } from "../../components/NewDocBtn";
 
@@ -15,25 +23,25 @@ const Documents = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (user === undefined) {
-      navigate("/login", { replace: true });
-    }
+    if (user !== undefined) return;
+    
+    navigate("/login", { replace: true });
   }, [user]);
 
   useEffect(() => {
-    if (user?.userId) {
-      setAuthVisibility(false);
-      const getDocs = async () => {
-        try {
-          const docsInfo = await getDocuments(user.userId);
-          setDocuments(docsInfo.data);
-        } catch (error) {
-          console.log(error)
-        }
-      };
-      
-      getDocs();
-    }
+    if (!user?.userId) return;
+
+    setAuthVisibility(false);
+    const getDocs = async () => {
+      try {
+        const docsInfo = await getDocuments(user.userId);
+        setDocuments(docsInfo.data);
+      } catch (error) {
+        console.log(error)
+      }
+    };
+    
+    getDocs();
   }, [user]);
 
   return (

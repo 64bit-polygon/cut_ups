@@ -1,33 +1,27 @@
 import React, { useState, useEffect } from "react";
-import styles from "./styles.module.scss";
-import { EmailPassword } from "../EmailPassword";
-import { LoadingBtn } from "../LoadingBtn";
-import {
-  SIGN_UP,
-  LOG_IN
-} from "../../constants";
-import { ToggleAuthType } from "../ToggleAuthType";
+import { useNavigate } from "react-router-dom";
+import { useRecoilValue } from "recoil";
 import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword
 } from "firebase/auth";
-import {
-  getEmailErrors,
-  getPasswordErrors
-} from "../../utils/validateAuth";
-import { useNavigate } from "react-router-dom";
-import { useRecoilState } from "recoil";
+import styles from "./styles.module.scss";
 import { showAuthSelector } from "../../state/selectors";
+import { getEmailErrors, getPasswordErrors } from "../../utils/validateAuth";
+import { EmailPassword } from "../EmailPassword";
+import { LoadingBtn } from "../LoadingBtn";
+import { ToggleAuthType } from "../ToggleAuthType";
+import { SIGN_UP, LOG_IN } from "../../constants";
 
 export const AuthForm = () => {
+  const isVisible = useRecoilValue(showAuthSelector);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState();
   const [passwordError, setPasswordError] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [apiError, setApiError] = useState();
-  const [isVisible, setAuthVisibility] = useRecoilState(showAuthSelector);
   const [authType, setAuthType] = useState(LOG_IN);
   const navigate = useNavigate();
 
@@ -82,7 +76,7 @@ export const AuthForm = () => {
   const createUser = async () => {
     const auth = getAuth();
     try {
-      const creds = createUserWithEmailAndPassword(auth, email, password);
+      const creds = await createUserWithEmailAndPassword(auth, email, password);
       return creds;
     } catch (error) {
       showApiError("Error creating your profile");
@@ -102,10 +96,10 @@ export const AuthForm = () => {
   const handleClick = async () => {
     const hasEmailErrors = await validateEmail();
     const hasPasswordErrors = validatePassword();
+
     if (hasEmailErrors || hasPasswordErrors) return;
 
     setIsLoading(true);
-
     const creds = authType === SIGN_UP ? await createUser() : await logInUser();
     const userId = creds?.user?.uid;
 

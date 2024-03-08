@@ -69,12 +69,11 @@ const getDocumentEntries = async userId => {
 }
 
 export const health = onRequest(options, (req, res) => {
-    const response = makeResonse({
-      data: { isAlive: true }
-    });
-    res.status(200).json(response);
-  }
-);
+  const response = makeResonse({
+    data: { isAlive: true }
+  });
+  res.status(200).json(response);
+});
 
 export const sources = onRequest(options, async (req, res) => {
   try {
@@ -213,7 +212,11 @@ export const getDocument = onRequest(options, async (req, res) => {
     }
 
     if (userId !== docData.userId) {
-      logger.warn({ userId, docId, message: "attempt to get a document by a user who doesn't own it" });
+      logger.warn({
+        userId,
+        docId,
+        message: "attempt to get a document by a user who doesn't own it"
+      });
 
       const response = makeResonse({
         code: 403,
@@ -285,7 +288,11 @@ export const updateDocument = onRequest(options, async (req, res) => {
     }
 
     if (userId !== docData.userId) {
-      logger.warn({ userId, docId, message: "attempt made to update a document from someone who doesn't own it" });
+      logger.warn({
+        userId,
+        docId,
+        message: "attempt made to update a document from someone who doesn't own it"
+      });
 
       const response = makeResonse({
         code: 403,
@@ -334,7 +341,11 @@ export const deleteDocuments = onRequest(options, async (req, res) => {
     });
 
     if (!docIdsToDelete.length) {
-      logger.warn({userId, docIds, message: "attempt made to delete documents from someone who doesn't own them"});
+      logger.warn({
+        userId,
+        docIds,
+        message: "attempt made to delete documents from someone who doesn't own them"
+      });
 
       const response = {
         errorMessage: "forbidden",

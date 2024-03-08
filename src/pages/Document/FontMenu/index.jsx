@@ -6,6 +6,7 @@ const SERIF_FONT = "romain";
 const MONO_FONT = "simplonMono";
 
 export const fontWhitelist = [SANS_SERIF_FONT, SERIF_FONT, MONO_FONT];
+
 const quillClasses = "ql-font";
 
 const fontButtons = [
@@ -26,4 +27,10 @@ const fontButtons = [
   }
 ]
 
-export const FontMenu = () => <QuillMenu defaultIconName="fontSerif" buttons={fontButtons} name="fonts" />
+export const FontMenu = () => (
+  <QuillMenu
+    defaultIconName="fontSerif"
+    buttons={fontButtons}
+    name="fonts"
+  />
+);

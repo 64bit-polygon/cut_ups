@@ -8,7 +8,15 @@ const BIG = "big";
 const LARGE = "large";
 const HUGE = "huge";
 
-export const fontSizeWhitelist = [TINY, SMALL, NORMAL, BIG, LARGE, HUGE];
+export const fontSizeWhitelist = [
+  TINY,
+  SMALL,
+  NORMAL,
+  BIG,
+  LARGE,
+  HUGE
+];
+
 const quillClasses = "ql-size";
 
 const fontSizeButtons = [
@@ -44,4 +52,10 @@ const fontSizeButtons = [
   }
 ]
 
-export const FontSizeMenu = () => <QuillMenu defaultIconName="18pt" buttons={fontSizeButtons} name="fontSizes" />
+export const FontSizeMenu = () => (
+  <QuillMenu
+    defaultIconName="18pt"
+    buttons={fontSizeButtons}
+    name="fontSizes"
+  />
+);

@@ -1,21 +1,31 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
-import styles from "./styles.module.scss";
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useCallback
+} from "react";
 import cn from "classnames";
+import { useRecoilState } from "recoil";
+import styles from "./styles.module.scss";
+import { showNewDocFlowSelector } from "../../state/selectors";
 import { DungeonCurtain } from "../../components/DungeonCurtain";
 import { XBtn } from "../../components/XBtn";
 import { NewDocForm } from "./NewDocForm";
-import {
-  newDocSource1Selector,
-  newDocSource2Selector,
-  showNewDocFlowSelector
-} from "../../state/selectors";
 import { SourceInterface } from "./SourceInterface";
-import { useRecoilState } from "recoil";
 
-const curtainCnt = 3;
+export const DEFAULT_SOURCE = {
+  userText: "",
+  id: "",
+  selectionType: ""
+};
+
+const CURTAIN_CNT = 3;
 
 const NewDocFlow = () => {
   const [isVisible, setVisibility] = useRecoilState(showNewDocFlowSelector);
+  const [source1, setSource1] = useState({...DEFAULT_SOURCE});
+  const [source2, setSource2] = useState({...DEFAULT_SOURCE});
+  const [title, setTitle] = useState("");
   const [listenerAdded, setIsListenerAdded] = useState();
   const [showCurtain1, setShowFirst] = useState(false);
   const [showCurtain2, setShowCurtain2] = useState(false);
@@ -72,7 +82,15 @@ const NewDocFlow = () => {
         setTimeout(() => setCurtain2Nudge(0), 750);
         break;
     }
-  }, [showCurtain1, showCurtain2, showCurtain3, scrollAmount, scrollMax, isVisible]);
+  },
+  [
+    showCurtain1,
+    showCurtain2,
+    showCurtain3,
+    scrollAmount,
+    scrollMax,
+    isVisible
+  ]);
 
   useEffect(() => {
     if (isVisible) {
@@ -103,21 +121,39 @@ const NewDocFlow = () => {
         className={cn(styles.curtainWrap, styles.num1, {[styles.down]: showCurtain1})}
         style={{top: curtain1Nudge}}
       >
-        <DungeonCurtain index="1" count={curtainCnt}>
-          <SourceInterface selector={newDocSource1Selector} name="source1" label="first" />
+        <DungeonCurtain index="1" count={CURTAIN_CNT}>
+          <SourceInterface
+            source={source1}
+            setSource={setSource1}
+            name="source1"
+            label="first"
+          />
         </DungeonCurtain>
       </div>
       <div
         className={cn(styles.curtainWrap, styles.num2, {[styles.down]: showCurtain2})}
         style={{top: curtain2Nudge}}
       >
-        <DungeonCurtain index="2" count={curtainCnt}>
-          <SourceInterface selector={newDocSource2Selector} name="source2" label="second" />
+        <DungeonCurtain index="2" count={CURTAIN_CNT}>
+          <SourceInterface
+            source={source2}
+            setSource={setSource2}
+            name="source2"
+            label="second"
+          />
         </DungeonCurtain>
       </div>
       <div className={cn(styles.curtainWrap, styles.num3, {[styles.down]: showCurtain3})}>
-        <DungeonCurtain index="3" count={curtainCnt} isScrollable={false}>
-          <NewDocForm isVisible={isVisible} />
+        <DungeonCurtain index="3" count={CURTAIN_CNT} isScrollable={false}>
+          <NewDocForm
+            isVisible={isVisible}
+            source1={source1}
+            setSource1={setSource1}
+            source2={source2}
+            setSource2={setSource2}
+            title={title}
+            setTitle={setTitle}
+          />
         </DungeonCurtain>
       </div>
     </div>
