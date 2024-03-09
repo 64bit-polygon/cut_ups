@@ -1,4 +1,7 @@
+@import "../../styles/colors.scss";
+
 .logoBtn {
+  position: relative;
   width: 80px;
   height: 80px;
   
@@ -8,5 +11,21 @@
 
   &::after {
     background-image: url(/images/logo-inverted.svg);
+  }
+}
+
+.border {
+  position: absolute;
+  width: 1px;
+  height: 120px;
+  top: -20px;
+  left: 37px;
+  transform: rotate(45deg);
+  background-color: $BTN_DARK;
+  opacity: 0;
+  transition: opacity 200ms;
+
+  @media (max-width: 700px) {
+    opacity: 1;
   }
 }

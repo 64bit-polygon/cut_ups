@@ -6,6 +6,10 @@
 
 .mainColumnWrap {
   padding: 0 43px;
+
+  @media (max-width: 700px) {
+    padding: 0 10px;
+  }
 }
 
 .mainColumn {
@@ -15,5 +19,5 @@
 }
 
 .header {
-  margin-bottom: 21px;
+  margin-bottom: 15px;
 }

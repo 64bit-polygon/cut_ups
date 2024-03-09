@@ -22,6 +22,54 @@ const htmlToRtf = new HtmlToRtfBrowser();
 
 const SAVING_TEXT = "saving";
 const ERROR_TEXT = "could not save : /";
+const TOOL_BAR_ID = "quillToolbar";
+
+const convertClassesToInlineStyles = str => {
+  const factor = 2.75;
+  const classMap = {
+    ".ql-align-center": "text-align: center;",
+    ".ql-align-justify": "text-align: justify;",
+    ".ql-align-right": "text-align: right;",
+    ".ql-font-simplonMono": "font-family: 'Courier New';",
+    ".ql-font-neutral": "font-family: 'Arial';",
+    ".ql-font-romain": "font-family: 'Times New Roman';",
+    ".ql-size-tiny": `font-size: ${9 * factor}px;`,
+    ".ql-size-small": `font-size: ${12 * factor}px;`,
+    ".ql-size-normal": `font-size: ${18 * factor}px;`,
+    ".ql-size-big": `font-size: ${24 * factor}px;`,
+    ".ql-size-large": `font-size: ${36 * factor}px;`,
+    ".ql-size-huge": `font-size: ${45 * factor}px;`
+  }
+  str = str.replaceAll("<strong", "<b");
+  str = str.replaceAll("</strong", "</b");
+  str = str.replaceAll("<em", "<i");
+  str = str.replaceAll("</em", "</i");
+
+  const html = document.createElement("div");
+  html.innerHTML = str;
+
+  Object.keys(classMap).forEach(styleClass => {
+    const elems = html.querySelectorAll(styleClass);
+    const rule = classMap[styleClass];
+    elems.forEach(elem => {
+      const styles = (elem.getAttribute("style") || "") + rule;
+      elem.setAttribute("style", styles);
+    });
+  })
+
+  return html.innerHTML;
+}
+
+const download = async (html, docTitle) => {
+  const htmlWithInlineStyles = convertClassesToInlineStyles(html);
+  const rtf = htmlToRtf.convertHtmlToRtf(htmlWithInlineStyles);
+  const standardizedRtf = replaceEscapedChars(rtf);
+  const blob = new Blob([standardizedRtf], { type: "text/rtf" });
+  const fileName = `${docTitle ? docTitle : "untitled"}.rtf`;
+  saveAs(blob, fileName);
+}
+
+const replaceEscapedChars = str => str.replaceAll("\\'2722", "\'22");
 
 const Document = () => {
   const [isNewDocFlowVisibile, setNewDocFlowVisibility] = useRecoilState(showNewDocFlowSelector);
@@ -148,55 +196,6 @@ const Document = () => {
     }
   }, [isDeleteScreenVisible]);
 
-  const convertClassesToInlineStyles = str => {
-    const factor = 2.75;
-    const classMap = {
-      ".ql-align-center": "text-align: center;",
-      ".ql-align-justify": "text-align: justify;",
-      ".ql-align-right": "text-align: right;",
-      ".ql-font-simplonMono": "font-family: 'Courier New';",
-      ".ql-font-neutral": "font-family: 'Arial';",
-      ".ql-font-romain": "font-family: 'Times New Roman';",
-      ".ql-size-tiny": `font-size: ${9 * factor}px;`,
-      ".ql-size-small": `font-size: ${12 * factor}px;`,
-      ".ql-size-normal": `font-size: ${18 * factor}px;`,
-      ".ql-size-big": `font-size: ${24 * factor}px;`,
-      ".ql-size-large": `font-size: ${36 * factor}px;`,
-      ".ql-size-huge": `font-size: ${45 * factor}px;`
-    }
-    str = str.replaceAll("<strong", "<b");
-    str = str.replaceAll("</strong", "</b");
-    str = str.replaceAll("<em", "<i");
-    str = str.replaceAll("</em", "</i");
-
-    const html = document.createElement("div");
-    html.innerHTML = str;
-
-    Object.keys(classMap).forEach(styleClass => {
-      const elems = html.querySelectorAll(styleClass);
-      const rule = classMap[styleClass];
-      elems.forEach(elem => {
-        const styles = (elem.getAttribute("style") || "") + rule;
-        elem.setAttribute("style", styles);
-      });
-    })
-
-    return html.innerHTML;
-  }
-
-  const replaceEscapedChars = str => str.replaceAll("\\'2722", "\'22");
-
-  const download = async () => {
-    const htmlWithInlineStyles = convertClassesToInlineStyles(editorContent);
-    const rtf = htmlToRtf.convertHtmlToRtf(htmlWithInlineStyles);
-    const standardizedRtf = replaceEscapedChars(rtf);
-    const blob = new Blob([standardizedRtf], { type: "text/rtf" });
-    const fileName = `${docTitle ? docTitle : "untitled"}.rtf`;
-    saveAs(blob, fileName);
-  }
-
-  const toolbarId = "quillToolbar";
-
   const fileBtns = [
     {
       iconName: "save",
@@ -205,7 +204,7 @@ const Document = () => {
     },
     {
       iconName: "download",
-      onClick: () => download(),
+      onClick: () => download(editorContent, docTitle),
       label: "download document"
     },
     {
@@ -224,7 +223,7 @@ const Document = () => {
 
   return (
     <div className={styles.page}>
-      <Toolbar id={toolbarId} />
+      <Toolbar id={TOOL_BAR_ID} />
       <div className={styles.metaTools}>
         <MetaTools
           showHowTo={() => setShowHowTo(true)}
@@ -247,7 +246,7 @@ const Document = () => {
             value={editorContent}
             isLoaded={isLoaded}
             setContent={setEditorContent}
-            toolbarId={toolbarId}
+            toolbarId={TOOL_BAR_ID}
             loadingErrorCode={loadingErrorCode}
             showSplitSources={areSourcesVisible}
             hasInitFadeIn={location.state?.fadeIn}

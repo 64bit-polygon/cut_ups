@@ -1,23 +1,42 @@
 @import "../../../styles/variables.scss";
 
+@keyframes toolbarScroll {
+  0% {
+    transform: translateY(0);
+  }
+  
+  1% {
+    transform: translateY(-70px);
+  }
+
+  100% {
+    transform: translateY(-70px);
+  }
+}
+
 .toolbar {
   position: fixed;
   top: 80px;
   left: 5px;
   z-index: 100;
   width: 0;
+
+  animation-name: toolbarScroll;
+  animation-duration: 1ms;
+  animation-direction: forwards;
+  animation-timeline: scroll();
 }
 
 .showMenu {
   position: absolute;
-  top: 0;
+  top: 35px;
   left: 0;
   height: 100px;
   width: 30px;
   background-image: url(/images/toolbar-show.svg);
   background-repeat: no-repeat;
   background-size: 4px 42px;
-  background-position: center 5px;
+  background-position: center center;
   opacity: 0;
   transition: opacity 200ms;
 

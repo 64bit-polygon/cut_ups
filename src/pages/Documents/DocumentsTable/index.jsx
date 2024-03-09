@@ -78,6 +78,7 @@ export const DocumentsTable = ({ documents }) => {
 
   const docsCnt = sortedDocs?.length;
   const speed = docsCnt > 3 ? 75 : 150;
+
   return (
     <div className={styles.table}>
       <div className={styles.headers}>

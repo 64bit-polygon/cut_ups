@@ -1,18 +1,17 @@
 @import "../../../styles/colors.scss";
-@import "../../../styles/breakPoints.scss";
 
 .document {
   position: relative;
   border: 1px solid $BTN_DARK;
-  padding: 45px 70px;
+  padding: 60px 85px;
   min-height: 1500px;
   cursor: text;
 
-  @media (max-width: 800px) {
+  @media (max-width: 925px) {
     padding: 25px 40px;
   }
 
-  @include phone {
+  @media (max-width: 600px) {
     padding: 15px 25px;
   }
 }
