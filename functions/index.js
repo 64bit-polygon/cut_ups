@@ -24,7 +24,12 @@ const makeResonse = ({data, code, errorMessage}) => {
 };
 
 const options = {
-  cors: ["http://localhost:5173", "http://localhost:4173"]
+  cors: [
+    "http://localhost:5173",
+    "http://localhost:4173",
+    "https://cut-ups.web.app",
+    "https://cutups.io/"
+  ]
 };
 
 const getSourceContent = async source => {
