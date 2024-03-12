@@ -6,6 +6,7 @@
   height: calc(100% - 21px);
   left: 0;
   transition: transform 600ms ease-in;
+  z-index: 1000;
 
   &.down {
     transform: translateY(0);

@@ -8,15 +8,21 @@
   box-sizing: border-box;
 }
 
+html {
+  overflow-x: hidden;
+}
+
 body {
   font: 15px/1.6 "Neutral";
   color: $TEXT;
+  overflow-x: hidden;
 }
 
 .invertingImgBtn {
   position: relative;
   display: inline-block;
 
+  &:focus,
   &:hover {
     &::before {
       opacity: 0;
@@ -53,6 +59,7 @@ body {
     background-position: center;
     transition: opacity 300ms;
 
+    &:focus,
     &:hover {
       opacity: 0;
     }

@@ -22,13 +22,14 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 100;
+  z-index: 1000;
   pointer-events: none;
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
   align-items: flex-start;
   gap: 20px;
+  opacity: 1;
   transition: opacity 200ms;
 
   &.hidden {
@@ -36,7 +37,20 @@
   }
 }
 
+@keyframes labelFadeIn {
+  0% {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
 .labelLine {
+  position: relative;
+  z-index: 1000;
   font: 45px/1 "SkyhookMono";
   color: $BTN_DARK;
   text-transform: uppercase;
@@ -47,6 +61,13 @@
   transition: color 200ms, background-color 200ms;
   white-space: nowrap;
 
+  .label.current & {
+    animation-name: labelFadeIn;
+    animation-duration: 2000ms;
+		animation-fill-mode: forwards;
+		animation-iteration-count: 1;
+  }
+
   @media( max-width: 450px ) {
     font-size: 35px;
   }
@@ -55,7 +76,7 @@
     font-size: 25px;
   }
   
-  .sounceInterface:hover & {
+  .sounceInterface:hover + .label & {
     color: $BTN_LIGHT;
     background-color: $BTN_DARK;
   }
@@ -65,7 +86,7 @@
   position: absolute;
   height: 100%;
   width: 60px;
-  z-index: 100;
+  z-index: 10;
   background-color: $BTN_LIGHT;
   top: 0;
   font: 19px/1 "SkyhookMono";
@@ -148,11 +169,12 @@
   top: 0;
   left: 0;
   width: calc(100% - 60px);
-  transition: width 700ms ease-out, transform 700ms ease-out;
+  transition: width 700ms ease-out, transform 700ms ease-out, background-color 700ms;
   background-color: $BACKGROUND;
 
   &.untouched {
     width: 50%;
+    background-color: transparent;
   }
 
   &.textInputSrcWrap {
@@ -177,8 +199,7 @@
       left: 0;
       height: 100%;
       width: 1px;
-      z-index: 1;
-      background-color: $BTN_LIGHT;
+      z-index: 10;
       border-right: 1px dashed $BTN_DARK;
     }
   }

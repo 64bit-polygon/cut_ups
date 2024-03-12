@@ -44,7 +44,53 @@
 }
 
 .content {
+  position: relative;
   width: 100%;
+}
+
+.navBtn {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 40px;
+
+  &::before,
+  &::after {
+    background-size: 70px 25px;
+  }
+
+  &.previous {
+    top: 100px;
+
+    @media (max-height: 720px) {
+      top: 20px;
+    }
+
+    &::before {
+      background-image: url(/images/prev-slide-arrow.svg);
+    }
+
+    &::after {
+      background-image: url(/images/prev-slide-arrow-inverted.svg);
+    }
+  }
+
+  &.next {
+    bottom: 100px;
+
+    @media (max-height: 720px) {
+      bottom: 20px;
+    }
+
+    &::before {
+      background-image: url(/images/next-slide-arrow.svg);
+    }
+
+    &::after {
+      background-image: url(/images/next-slide-arrow-inverted.svg);
+    }
+  }
 }
 
 .scrollLabel {

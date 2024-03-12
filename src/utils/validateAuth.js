@@ -8,7 +8,7 @@ const isEmailValid = email => {
 
 export const getEmailErrors = async (email, authType) => {
   if (!isEmailValid(email)) return "Invalid email";
-
+  console.log(authType)
   if (authType !== SIGN_UP) return;
 
   const response = await getIsEmailAvailable(email);

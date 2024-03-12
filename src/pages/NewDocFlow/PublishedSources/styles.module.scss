@@ -1,6 +1,8 @@
 @import "../../../styles/colors.scss";
 
 .sources {
+  position: relative;
+  z-index: 0;
   padding: 10px 20px;
 
   @media( max-width: 500px ) {
@@ -22,7 +24,7 @@
   display: block;
   font: 12px/22px "Neutral";
   color: $BTN_DARK;
-  background-color: $BTN_LIGHT;
+  background-color: transparent;
   transition: color 200ms, background-color 200ms;
   cursor: pointer;
   padding: 0 8px;

@@ -1,4 +1,4 @@
-const URL_BASE = "https://cut-ups.firebaseapp.com/api";
+const URL_BASE = "https://cutups.io/api";
 
 export const makeNewDoc = async({
   userId,

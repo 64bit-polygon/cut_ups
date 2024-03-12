@@ -21,19 +21,22 @@ export const DEFAULT_SOURCE = {
 
 const CURTAIN_CNT = 3;
 
+const IS_TOUCH = !!("ontouchstart" in window || navigator.maxTouchPoints);
+
 const NewDocFlow = () => {
   const [isVisible, setVisibility] = useRecoilState(showNewDocFlowSelector);
   const [source1, setSource1] = useState({...DEFAULT_SOURCE});
   const [source2, setSource2] = useState({...DEFAULT_SOURCE});
   const [title, setTitle] = useState("");
   const [listenerAdded, setIsListenerAdded] = useState();
-  const [showCurtain1, setShowFirst] = useState(false);
+  const [showCurtain1, setShowCurtain1] = useState(false);
   const [showCurtain2, setShowCurtain2] = useState(false);
   const [showCurtain3, setShowCurtain3] = useState(false);
   const [scrollAmount, setScrollAmount] = useState(null);
   const [scrollMax, setScrollMax] = useState(null);
   const [curtain1Nudge, setCurtain1Nudge] = useState(0);
   const [curtain2Nudge, setCurtain2Nudge] = useState(0);
+  const [currentCurtain, setCurrentCurtain] = useState(null);
   const documentRef = useRef(document);
 
   const onScroll = useCallback(() => {
@@ -43,6 +46,8 @@ const NewDocFlow = () => {
   }, [])
 
   useEffect(() => {
+    if (IS_TOUCH) return;
+
     if ( isVisible && !listenerAdded ) {
       documentRef.current.addEventListener("scroll", onScroll);
       setIsListenerAdded(true);
@@ -57,17 +62,18 @@ const NewDocFlow = () => {
   }, [isVisible, listenerAdded]);
 
   useEffect(() => {
-    if (!isVisible) return;
+    if (!isVisible || IS_TOUCH) return;
+
     const percentScrolled = scrollAmount / scrollMax * 100;
     switch (true) {
       case percentScrolled <= 15 && showCurtain1:
         setCurtain1Nudge(-0.5 * scrollAmount);
         break;
       case percentScrolled > 15 && showCurtain1:
-        setShowFirst(false);
+        setShowCurtain1(false);
         break;
       case percentScrolled <= 15 && !showCurtain1:
-        setShowFirst(true);
+        setShowCurtain1(true);
         setTimeout(() => setCurtain1Nudge(0), 750);
         break;
       case (percentScrolled > 70) && (percentScrolled <= 85) && showCurtain2:
@@ -96,11 +102,11 @@ const NewDocFlow = () => {
     if (isVisible) {
       setShowCurtain3(true);
       setTimeout(() => setShowCurtain2(true), 75);
-      setTimeout(() => setShowFirst(true), 150); 
+      setTimeout(() => setShowCurtain1(true), 150); 
     }
 
     if (isVisible === false) {
-      setShowFirst(false);
+      setShowCurtain1(false);
       setShowCurtain2(false);
       setShowCurtain3(false);
       setTimeout(() => {
@@ -111,22 +117,46 @@ const NewDocFlow = () => {
     }
   }, [isVisible]);
 
-  const handleClose = () => setVisibility(false);
+  useEffect(() => {
+    switch (true) {
+      case showCurtain1 && showCurtain2 && showCurtain3:
+        setCurrentCurtain("1");
+        break;
+      case !showCurtain1 && showCurtain2 && showCurtain3:
+        setCurrentCurtain("2");
+        break;
+      case !showCurtain1 && !showCurtain2 && showCurtain3:
+        setCurrentCurtain("3");
+        break;
+      default:
+        setCurrentCurtain();
+    }
+  }, [showCurtain1, showCurtain2, showCurtain3]);
 
+  const handleClose = () => setVisibility(false);
+  
   return (
     <div className={cn(styles.newDocFlow, {[styles.visible]: isVisible})}>
       <XBtn onClick={handleClose} isVisible={isVisible} />
-      <div className={cn(styles.documentExtender, {[styles.long]: isVisible})} />
+      <div className={cn(styles.documentExtender, {[styles.long]: isVisible && !IS_TOUCH})} />
       <div
         className={cn(styles.curtainWrap, styles.num1, {[styles.down]: showCurtain1})}
         style={{top: curtain1Nudge}}
       >
-        <DungeonCurtain index="1" count={CURTAIN_CNT}>
+        <DungeonCurtain
+          index="1"
+          count={CURTAIN_CNT}
+          isScrollable={!IS_TOUCH}
+          showDown={IS_TOUCH}
+          handleNext={() => setShowCurtain1(false)}
+          isCurrentCurtain={currentCurtain === "1"}
+        >
           <SourceInterface
             source={source1}
             setSource={setSource1}
             name="source1"
             label="first"
+            isCurrent={currentCurtain === "1"}
           />
         </DungeonCurtain>
       </div>
@@ -134,17 +164,33 @@ const NewDocFlow = () => {
         className={cn(styles.curtainWrap, styles.num2, {[styles.down]: showCurtain2})}
         style={{top: curtain2Nudge}}
       >
-        <DungeonCurtain index="2" count={CURTAIN_CNT}>
+        <DungeonCurtain
+          index="2"
+          count={CURTAIN_CNT}
+          isScrollable={!IS_TOUCH}
+          showUp={IS_TOUCH}
+          showDown={IS_TOUCH}
+          handlePrevious={() => setShowCurtain1(true)}
+          handleNext={() => setShowCurtain2(false)}
+          isCurrentCurtain={currentCurtain === "2"}
+        >
           <SourceInterface
             source={source2}
             setSource={setSource2}
             name="source2"
             label="second"
+            isCurrent={currentCurtain === "2"}
           />
         </DungeonCurtain>
       </div>
       <div className={cn(styles.curtainWrap, styles.num3, {[styles.down]: showCurtain3})}>
-        <DungeonCurtain index="3" count={CURTAIN_CNT} isScrollable={false}>
+        <DungeonCurtain
+          index="3"
+          count={CURTAIN_CNT}
+          isScrollable={false}
+          showUp={IS_TOUCH}
+          handlePrevious={() => setShowCurtain2(true)}
+        >
           <NewDocForm
             isVisible={isVisible}
             source1={source1}

@@ -44,16 +44,30 @@
 .loader {
   position: absolute;
   z-index: 1;
-  top: 45px;
-  bottom: 45px;
-  left: 70px;
-  right: 70px;
+  top: 60px;
+  bottom: 60px;
+  left: 85px;
+  right: 85px;
   pointer-events: none;
   background-image: url(/images/document-lines.svg);
   background-size: 800px 206px;
   background-repeat: repeat-y;
   background-position: top right;
   transition: opacity 200ms;
+
+  @media (max-width: 925px) {
+    top: 25px;
+    bottom: 25px;
+    left: 40px;
+    right: 40px;
+  }
+
+  @media (max-width: 600px) {
+    top: 15px;
+    bottom: 15px;
+    left: 25px;
+    right: 25px;
+  }
 
   &.hidden {
     opacity: 0;

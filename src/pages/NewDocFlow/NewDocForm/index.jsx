@@ -43,6 +43,8 @@ export const NewDocForm = ({
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (!isVisible) return;
+
     setShowAuthForm(isVisible && !user);
   }, [isVisible, user]);
  
@@ -76,6 +78,7 @@ export const NewDocForm = ({
       setSource1(DEFAULT_SOURCE);
       setSource2(DEFAULT_SOURCE);
       setTitle("");
+      setAuthType(SIGN_UP);
     }, 500);
   }, [isVisible]);
 
@@ -96,7 +99,7 @@ export const NewDocForm = ({
   }
 
   const validateEmail = async () => {
-    const errors = await getEmailErrors(email);
+    const errors = await getEmailErrors(email, authType);
     setEmailError(errors);
 
     return !!errors;
