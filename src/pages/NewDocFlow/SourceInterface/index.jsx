@@ -11,7 +11,8 @@ export const SourceInterface = ({
   setSource,
   name,
   label,
-  isCurrent
+  isCurrent,
+  isTouch
 }) => {
   const updateSelection = (key, value) => setSource({...source, [key]: value});
   const isUntouched = !source.selectionType;
@@ -47,9 +48,17 @@ export const SourceInterface = ({
     }
   );
 
+  const labelClasses = cn(
+    styles.label,
+    {
+      [styles.hidden]: !isUntouched && isTouch,
+      [styles.current]: isCurrent && isTouch,
+    }
+  )
+
   return (
     <div className={cn(styles.sounceInterface, {[styles.touched]: !isUntouched})}>
-      <div className={cn(styles.label, {[styles.hidden]: !isUntouched, [styles.current]: isCurrent})}>
+      <div className={labelClasses}>
         <div className={styles.labelLine}>Select {label}</div>
         <div className={styles.labelLine}>source</div>
       </div>

@@ -157,6 +157,7 @@ const NewDocFlow = () => {
             name="source1"
             label="first"
             isCurrent={currentCurtain === "1"}
+            isTouch={IS_TOUCH}
           />
         </DungeonCurtain>
       </div>
@@ -180,6 +181,7 @@ const NewDocFlow = () => {
             name="source2"
             label="second"
             isCurrent={currentCurtain === "2"}
+            isTouch={IS_TOUCH}
           />
         </DungeonCurtain>
       </div>
