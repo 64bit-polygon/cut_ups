@@ -89,7 +89,7 @@ export const AuthForm = () => {
       const creds = await signInWithEmailAndPassword(auth, email, password);
       return creds;
     } catch (error) {
-      showApiError("Could not sign in");
+      showApiError("Invalid user name or password");
     }
   }
 

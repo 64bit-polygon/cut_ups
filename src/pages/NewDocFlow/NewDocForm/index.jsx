@@ -43,7 +43,7 @@ export const NewDocForm = ({
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!isVisible) return;
+    if (!isVisible || password) return;
 
     setShowAuthForm(isVisible && !user);
   }, [isVisible, user]);
@@ -147,7 +147,7 @@ export const NewDocForm = ({
       const creds = await signInWithEmailAndPassword(auth, email, password);
       return creds;
     } catch (error) {
-      showApiError("Could not sign in");
+      showApiError("Invalid user name or password");
     }
   }
 
