@@ -1,8 +1,15 @@
 {
   "name": "cut_ups",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
+  "author": "Nate De La Cruz",
+  "person": {
+    "name": "Nate De La Cruz",
+    "url": "https://natedelacruz.com/"
+  },
+  "homepage": "https://natedelacruz.com/",
+  "license": "ISC",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
