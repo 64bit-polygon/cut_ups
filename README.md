@@ -33,6 +33,7 @@ I'm using [`recoil`](https://recoiljs.org/) as it's comparatively succinct and s
 ## Static assets
 
 **`/public/images`**: images
+
 **`/public/fonts`**: fonts
 
 To reference them in a component or `.scss` file, `Vite` assumes all relative URLs from the `/public` directory as a base:
