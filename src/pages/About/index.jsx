@@ -25,9 +25,7 @@ const About = () => {
         <p>
           This is a text editor web app can be used to create cut ups
           [see below] or new text documents. You can edit the document
-          and save it to the cloud or download it as a .doc document.
-          You can also lock the document so it can be publicly viewable
-          but not editable.
+          and save it to the cloud or download it as a .rtf document.
         </p>
         <h3>What are cut ups?</h3>
         <p>
