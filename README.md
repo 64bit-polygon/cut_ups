@@ -1,6 +1,6 @@
-# [cutups.io/](https://cutups.io/)
+# [cutups.io](https://cutups.io/)
 
-[cutups.io/](https://cutups.io/) is a text editor web app can be used to create cut ups or new text documents. You can edit the document and save it to the cloud or download it as a .rtf document.
+[cutups.io](https://cutups.io/) is a text editor web app can be used to create cut ups or new text documents. You can edit the document and save it to the cloud or download it as a .rtf document.
 
 ## What are cut ups?
 
