@@ -51,7 +51,7 @@ export const SourceInterface = ({
   const labelClasses = cn(
     styles.label,
     {
-      [styles.hidden]: !isUntouched && isTouch,
+      [styles.hidden]: !isUntouched,
       [styles.current]: isCurrent && isTouch,
     }
   )
